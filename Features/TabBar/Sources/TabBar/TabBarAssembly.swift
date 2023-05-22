@@ -7,6 +7,8 @@
 
 import Foundation
 
-public protocol CoordinatorProtocol: AnyObject {
-    func start()
+public enum TabBarAssembly {
+    public static func setup() {
+        
+    }
 }

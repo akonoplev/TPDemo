@@ -3,29 +3,35 @@
 
 import PackageDescription
 
+import PackageDescription
+
 let package = Package(
-    name: "ProfileFeature",
+    name: "TabBar",
     platforms: [
         .iOS(.v14)
     ],
     products: [
         .library(
-            name: "ProfileFeature",
-            targets: ["ProfileFeature"]),
+            name: "TabBar",
+            targets: ["TabBar"]),
     ],
     dependencies: [
         .package(path: "./BaseArch"),
-        .package(path: "./DipCore")
+        .package(path: "./DipCore"),
+        .package(path: "./ProfileFeature"),
+        .package(path: "./MainFeature")
     ],
     targets: [
         .target(
-            name: "ProfileFeature",
+            name: "TabBar",
             dependencies: [
                 "BaseArch",
-                "DipCore"
+                "DipCore",
+                "ProfileFeature",
+                "MainFeature"
             ]),
         .testTarget(
-            name: "ProfileFeatureTests",
-            dependencies: ["ProfileFeature"]),
+            name: "TabBarTests",
+            dependencies: ["TabBar"]),
     ]
 )

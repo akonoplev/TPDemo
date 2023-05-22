@@ -12,6 +12,14 @@
 		9ADB231D2A1B55780097259F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9ADB231C2A1B55780097259F /* Assets.xcassets */; };
 		9ADB23202A1B55780097259F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9ADB231E2A1B55780097259F /* LaunchScreen.storyboard */; };
 		9ADB232D2A1B58850097259F /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADB232C2A1B58850097259F /* AppCoordinator.swift */; };
+		9ADB23372A1B8A750097259F /* AppAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADB23362A1B8A750097259F /* AppAssembly.swift */; };
+		9ADB233A2A1B8D590097259F /* AuthorizationFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 9ADB23392A1B8D590097259F /* AuthorizationFeature */; };
+		9ADB233C2A1B8D5F0097259F /* BaseArch in Frameworks */ = {isa = PBXBuildFile; productRef = 9ADB233B2A1B8D5F0097259F /* BaseArch */; };
+		9ADB233E2A1B8D640097259F /* DipCore in Frameworks */ = {isa = PBXBuildFile; productRef = 9ADB233D2A1B8D640097259F /* DipCore */; };
+		9ADB23402A1B8D6B0097259F /* ProfileFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 9ADB233F2A1B8D6B0097259F /* ProfileFeature */; };
+		9ADB23422A1B8D6F0097259F /* SuperCore in Frameworks */ = {isa = PBXBuildFile; productRef = 9ADB23412A1B8D6F0097259F /* SuperCore */; };
+		9ADB23442A1B8D730097259F /* MainFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 9ADB23432A1B8D730097259F /* MainFeature */; };
+		9ADB23472A1B8EF90097259F /* TabBar in Frameworks */ = {isa = PBXBuildFile; productRef = 9ADB23462A1B8EF90097259F /* TabBar */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +36,8 @@
 		9ADB232F2A1B63ED0097259F /* AuthorizationFeature */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = AuthorizationFeature; path = Features/AuthorizationFeature; sourceTree = "<group>"; };
 		9ADB23302A1B640B0097259F /* MainFeature */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = MainFeature; path = Features/MainFeature; sourceTree = "<group>"; };
 		9ADB23312A1B64320097259F /* ProfileFeature */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = ProfileFeature; path = Features/ProfileFeature; sourceTree = "<group>"; };
+		9ADB23362A1B8A750097259F /* AppAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAssembly.swift; sourceTree = "<group>"; };
+		9ADB23452A1B8EDA0097259F /* TabBar */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = TabBar; path = Features/TabBar; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +45,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9ADB233E2A1B8D640097259F /* DipCore in Frameworks */,
+				9ADB233A2A1B8D590097259F /* AuthorizationFeature in Frameworks */,
+				9ADB23472A1B8EF90097259F /* TabBar in Frameworks */,
+				9ADB23442A1B8D730097259F /* MainFeature in Frameworks */,
+				9ADB233C2A1B8D5F0097259F /* BaseArch in Frameworks */,
+				9ADB23422A1B8D6F0097259F /* SuperCore in Frameworks */,
+				9ADB23402A1B8D6B0097259F /* ProfileFeature in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -47,6 +64,7 @@
 				9ADB23272A1B56860097259F /* Packages */,
 				9ADB23122A1B55760097259F /* TPDemo */,
 				9ADB23112A1B55760097259F /* Products */,
+				9ADB23382A1B8D590097259F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -65,6 +83,7 @@
 				9ADB232B2A1B57B00097259F /* Resources */,
 				9ADB23132A1B55760097259F /* AppDelegate.swift */,
 				9ADB232C2A1B58850097259F /* AppCoordinator.swift */,
+				9ADB23362A1B8A750097259F /* AppAssembly.swift */,
 			);
 			path = TPDemo;
 			sourceTree = "<group>";
@@ -78,6 +97,7 @@
 				9ADB232F2A1B63ED0097259F /* AuthorizationFeature */,
 				9ADB23302A1B640B0097259F /* MainFeature */,
 				9ADB23312A1B64320097259F /* ProfileFeature */,
+				9ADB23452A1B8EDA0097259F /* TabBar */,
 			);
 			name = Packages;
 			sourceTree = "<group>";
@@ -90,6 +110,13 @@
 				9ADB231E2A1B55780097259F /* LaunchScreen.storyboard */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		9ADB23382A1B8D590097259F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -108,6 +135,15 @@
 			dependencies = (
 			);
 			name = TPDemo;
+			packageProductDependencies = (
+				9ADB23392A1B8D590097259F /* AuthorizationFeature */,
+				9ADB233B2A1B8D5F0097259F /* BaseArch */,
+				9ADB233D2A1B8D640097259F /* DipCore */,
+				9ADB233F2A1B8D6B0097259F /* ProfileFeature */,
+				9ADB23412A1B8D6F0097259F /* SuperCore */,
+				9ADB23432A1B8D730097259F /* MainFeature */,
+				9ADB23462A1B8EF90097259F /* TabBar */,
+			);
 			productName = TPDemo;
 			productReference = 9ADB23102A1B55760097259F /* TPDemo.app */;
 			productType = "com.apple.product-type.application";
@@ -163,6 +199,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9ADB23372A1B8A750097259F /* AppAssembly.swift in Sources */,
 				9ADB232D2A1B58850097259F /* AppCoordinator.swift in Sources */,
 				9ADB23142A1B55760097259F /* AppDelegate.swift in Sources */,
 			);
@@ -384,6 +421,37 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		9ADB23392A1B8D590097259F /* AuthorizationFeature */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AuthorizationFeature;
+		};
+		9ADB233B2A1B8D5F0097259F /* BaseArch */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = BaseArch;
+		};
+		9ADB233D2A1B8D640097259F /* DipCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DipCore;
+		};
+		9ADB233F2A1B8D6B0097259F /* ProfileFeature */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ProfileFeature;
+		};
+		9ADB23412A1B8D6F0097259F /* SuperCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SuperCore;
+		};
+		9ADB23432A1B8D730097259F /* MainFeature */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = MainFeature;
+		};
+		9ADB23462A1B8EF90097259F /* TabBar */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = TabBar;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 9ADB23082A1B55760097259F /* Project object */;
 }

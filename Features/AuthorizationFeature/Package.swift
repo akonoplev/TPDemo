@@ -16,12 +16,16 @@ let package = Package(
     ],
     dependencies: [
         .package(path: "./BaseArch"),
+        .package(path: "./DipCore"),
+        .package(path: "./SuperCore")
     ],
     targets: [
         .target(
             name: "AuthorizationFeature",
             dependencies: [
-                "BaseArch"
+                "BaseArch",
+                "DipCore",
+                "SuperCore"
             ]),
         .testTarget(
             name: "AuthorizationFeatureTests",

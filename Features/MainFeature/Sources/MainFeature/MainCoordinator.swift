@@ -8,11 +8,13 @@
 import BaseArch
 
 public protocol MainCoordinatorProtocol: CoordinatorProtocol {
-
+    var output: ActionClosure? { get set }
 }
 
-final class MainCoordinator: BaseCoordinator {
+final class MainCoordinator: BaseCoordinator, MainCoordinatorProtocol {
+    var output: BaseArch.ActionClosure?
+
     override func start() {
-        
+
     }
 }

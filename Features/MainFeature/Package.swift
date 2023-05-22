@@ -15,11 +15,16 @@ let package = Package(
     ],
     dependencies: [
         .package(path: "./BaseArch"),
+        .package(path: "./DipCore"),
+        
     ],
     targets: [
         .target(
             name: "MainFeature",
-            dependencies: ["BaseArch"]),
+            dependencies: [
+                "BaseArch",
+                "DipCore"
+            ]),
         .testTarget(
             name: "MainFeatureTests",
             dependencies: ["MainFeature"]),

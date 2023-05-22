@@ -5,8 +5,10 @@
 //  Created by Андрей Коноплев on 22.05.2023.
 //
 
-import Foundation
+import DipCore
 
-public protocol CoordinatorProtocol: AnyObject {
-    func start()
+public enum ProfileAssembly {
+    public static func setup() {
+
+    }
 }

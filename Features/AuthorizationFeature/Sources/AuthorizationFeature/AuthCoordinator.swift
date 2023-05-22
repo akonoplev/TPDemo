@@ -7,9 +7,14 @@
 
 import BaseArch
 
-public protocol AuthCoordinatorProtocol: CoordinatorProtocol {}
+public protocol AuthCoordinatorProtocol: CoordinatorProtocol {
+    var output: ActionClosure? { get set }
+}
 
 final class AuthCoordinator: BaseCoordinator, AuthCoordinatorProtocol {
+    
+    var output: ActionClosure?
+
 
     override func start() {
         

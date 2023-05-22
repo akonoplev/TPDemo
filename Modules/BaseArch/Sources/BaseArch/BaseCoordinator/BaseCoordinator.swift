@@ -8,6 +8,7 @@
 import Foundation
 
 open class BaseCoordinator: CoordinatorProtocol, ActionHandlingCoordinatorProtocol {
+
     public typealias CustomHandler<T> = (_ action: T, _ didHandleAction: Bool) -> Void
 
     public var actionClosure: ActionClosure?
