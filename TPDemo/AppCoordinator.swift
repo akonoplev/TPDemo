@@ -19,4 +19,11 @@ final class AppCoordinator {
         viewController.view.backgroundColor = UIColor.red
         window.rootViewController = viewController
     }
+
+
+    // Feature1
+    // Feature2
+
+    // Feature3 -> output (show Feature 1)
+    // func feature1()
 }

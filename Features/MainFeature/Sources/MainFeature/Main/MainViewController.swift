@@ -18,6 +18,13 @@ final class MainViewController: UIViewController, MainViewControllerProtocol {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        let button = UIButton()
+        button.addTarget(self, action: #selector(showAuth), for: .touchUpInside)
+    }
+
+    @objc func showAuth() {
+        print("show Auth")
     }
 
     init(presenter: MainPresenterProtcol) {
