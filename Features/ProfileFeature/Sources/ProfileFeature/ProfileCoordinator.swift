@@ -13,7 +13,7 @@ public protocol MainCoordinatorProtocol: CoordinatorProtocol {
     var output: ActionClosure? { get set }
 }
 
-final class MainCoordinator: BaseCoordinator, MainCoordinatorProtocol {
+final class MainCoordinator: BaseCoordinator<Assembly, BaseCoordinatorContext>, MainCoordinatorProtocol {
 
     var output: ActionClosure?
 

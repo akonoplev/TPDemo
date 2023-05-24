@@ -7,21 +7,25 @@
 
 import Foundation
 
-open class BaseCoordinator: CoordinatorProtocol, ActionHandlingCoordinatorProtocol {
+open class BaseCoordinator<Assembly: AnyObject, Context>: CoordinatorProtocol, ActionHandlingCoordinatorProtocol {
 
     public typealias CustomHandler<T> = (_ action: T, _ didHandleAction: Bool) -> Void
 
     public var actionClosure: ActionClosure?
-
+    public weak var assembly: Assembly?
+    public let context: Context
     public let storage: CoordinatorActionHandlerStorageProtocol
 
     private var childCoordinators: [CoordinatorProtocol] = []
 
-    public init(storage: CoordinatorActionHandlerStorageProtocol) {
+    public init(assembly: Assembly, context: Context, storage: CoordinatorActionHandlerStorageProtocol) {
+        self.assembly = assembly
         self.storage = storage
+        self.context = context
     }
 
     open func start() {
+        fatalError("This method is abstract")
     }
 
     open func cleanup() {
@@ -87,5 +91,11 @@ open class BaseCoordinator: CoordinatorProtocol, ActionHandlingCoordinatorProtoc
             return
         }
         customHandler?(nonCommonAction, didHandleAction)
+    }
+}
+
+public extension BaseCoordinator where Context == BaseCoordinatorContext {
+    convenience init(assembly: Assembly, storage: CoordinatorActionHandlerStorageProtocol) {
+        self.init(assembly: assembly, context: BaseCoordinatorContext(), storage: storage)
     }
 }
