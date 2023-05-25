@@ -7,6 +7,6 @@
 
 import Foundation
 
-public protocol CoordinatorProtocol: AnyObject {
-    func start()
-}
+//public protocol CoordinatorProtocol: AnyObject {
+//    func start()
+//}

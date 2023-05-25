@@ -6,16 +6,17 @@
 //
 
 import BaseArch
+import UIKit
 
-public protocol AuthCoordinatorProtocol: CoordinatorProtocol {
-    var output: ActionClosure? { get set }
-}
+//public protocol AuthCoordinatorProtocol: CoordinatorProtocol {
+//    var output: ActionClosure? { get set }
+//}
 
-final class AuthCoordinator: BaseCoordinator<Assembly, BaseCoordinatorContext>, AuthCoordinatorProtocol {
+final class AuthCoordinator: NavigationCoordinator<Assembly, BaseCoordinatorContext> {
     
     var output: ActionClosure?
 
-    override func start() {
-        
+    override func make() -> UIViewController? {
+        nil
     }
 }

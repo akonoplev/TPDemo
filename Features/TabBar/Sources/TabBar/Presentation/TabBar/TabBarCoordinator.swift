@@ -8,43 +8,38 @@
 import BaseArch
 import UIKit
 
-public protocol TabBarCoordinatorProtocol: CoordinatorProtocol {
-
+public protocol TabBarCoordinatorProtocol: CoreCoordinator {
+    var tabBarController: UITabBarController { get }
 }
 
-final class TabBarCoordinator: BaseCoordinator<Assembly, BaseCoordinatorContext>, TabBarCoordinatorProtocol {
-
-     
-    init(
-        navigationController: UINavigationController,
-        assembly: Assembly,
-        context: BaseCoordinatorContext,
-        storage: CoordinatorActionHandlerStorageProtocol
-    ) {
-        self.navigationController = navigationController
-        super.init(assembly: assembly, context: context, storage: storage)
-        
-        setupTabBar()
-    }
+public final class TabBarCoordinator: BaseArch.TabbarCoordinator<Assembly, BaseCoordinatorContext>, TabBarCoordinatorProtocol {
     
     // TODO: Сделать наследников BaseCoordinator типа TabbarCoordinator с заготовленным рутовым контроллером
     // По аналогии сделать NavigationCoordinator и ModalCoordinator. Мб еще WindowCoordinator какой-нибудь
     // Или с любым другом типом представления. Даже можно попробовать SUICoordinator, который через
     // HostingController открывает SUI контент
-    let tabBarController = UITabBarController()
-    
-    private let navigationController: UINavigationController
 
-    override func start() {
-        navigationController.setViewControllers([tabBarController], animated: false)
-    }
+    public let tabBarController = UITabBarController()
 
-    private func setupTabBar() {
+    override public func make() -> BasePresentableCollection<UIViewController>? {
+        // добавить отображаемые контроллеры
         let controllerForTabBar = UIViewController()
         controllerForTabBar.view.backgroundColor = .red
         controllerForTabBar.tabBarItem = .init(title: "TEST", image: nil, tag: 0)
-        tabBarController.viewControllers = [
-            controllerForTabBar
-        ]
+        
+        return .init(items: [controllerForTabBar])
     }
+
+//    override func start() {
+//        navigationController.setViewControllers([tabBarController], animated: false)
+//    }
+
+//    private func setupTabBar() {
+//        let controllerForTabBar = UIViewController()
+//        controllerForTabBar.view.backgroundColor = .red
+//        controllerForTabBar.tabBarItem = .init(title: "TEST", image: nil, tag: 0)
+//        tabBarController.viewControllers = [
+//            controllerForTabBar
+//        ]
+//    }
 }

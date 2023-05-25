@@ -10,14 +10,13 @@ import UIKit
 
 extension Assembly {
     func registerTabBar() {
-        Dependency.register { (navigationController: UINavigationController) in
+        Dependency.register {
             TabBarCoordinator(
-                navigationController: navigationController,
                 assembly: self,
                 context: .init(),
                 storage: Dependency.resolve()
             )
         }
-        .implements(TabBarCoordinatorProtocol.self)
+        .implements(TabBarCoordinator.self)
     }
 }

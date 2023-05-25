@@ -9,18 +9,15 @@ import DipCore
 import BaseArch
 import SwiftUI
 
-public protocol MainCoordinatorProtocol: CoordinatorProtocol {
-    var output: ActionClosure? { get set }
-}
+//public protocol MainCoordinatorProtocol: CoordinatorProtocol {
+//    var output: ActionClosure? { get set }
+//}
 
-final class MainCoordinator: BaseCoordinator<Assembly, BaseCoordinatorContext>, MainCoordinatorProtocol {
+final class MainCoordinator: NavigationCoordinator<Assembly, BaseCoordinatorContext> {
 
     var output: ActionClosure?
 
-    override func start() {
-
-//        let view = ProfileView(viewModel: ProfileViewModel(actionClosure: output))
-//        let vc = UIHostingController(rootView: view)
-
+    override func make() -> UIViewController? {
+        nil
     }
 }

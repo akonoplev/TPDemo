@@ -8,5 +8,5 @@
 import Foundation
 
 public protocol ActionHandlerProtocol {
-    func handle(action: ActionProtocol, coordinator: CoordinatorProtocol) -> Bool
+    func handle(action: ActionProtocol, coordinator: Coordinator) -> Bool
 }

@@ -7,16 +7,19 @@
 
 import Foundation
 
-open class BaseCoordinator<Assembly: AnyObject, Context>: CoordinatorProtocol, ActionHandlingCoordinatorProtocol {
+open class BaseCoordinator<Assembly: AnyObject, Context, Root: RootController>: CoreCoordinator, ActionHandlingCoordinatorProtocol {
 
     public typealias CustomHandler<T> = (_ action: T, _ didHandleAction: Bool) -> Void
 
-    public var actionClosure: ActionClosure?
     public weak var assembly: Assembly?
     public let context: Context
     public let storage: CoordinatorActionHandlerStorageProtocol
 
-    private var childCoordinators: [CoordinatorProtocol] = []
+    open weak var root: Root?
+
+    public var actionClosure: ActionClosure?
+
+//    private var childCoordinators: [CoordinatorProtocol] = []
 
     public init(assembly: Assembly, context: Context, storage: CoordinatorActionHandlerStorageProtocol) {
         self.assembly = assembly
@@ -24,36 +27,40 @@ open class BaseCoordinator<Assembly: AnyObject, Context>: CoordinatorProtocol, A
         self.context = context
     }
 
-    open func start() {
+    open func make() -> Root.Module? {
         fatalError("This method is abstract")
     }
 
+    // MARK: разобрать cleanup при изменении логики на новую
     open func cleanup() {
         actionClosure = nil
     }
 
-    public func startCoordinator(_ coordinator: CoordinatorProtocol) {
-        coordinator.start()
-        childCoordinators.append(coordinator)
-    }
+//    public func startCoordinator(_ coordinator: CoordinatorProtocol) {
+//        coordinator.start()
+//        childCoordinators.append(coordinator)
+//    }
+//
+//    public func removeCoordinator(_ coordinator: CoordinatorProtocol) {
+//        for (index, childCoordinator) in childCoordinators.enumerated() where childCoordinator === coordinator {
+//            childCoordinators.remove(at: index)
+//            (childCoordinator as? BaseCoordinator)?.cleanup()
+//        }
+//    }
 
-    public func removeCoordinator(_ coordinator: CoordinatorProtocol) {
-        for (index, childCoordinator) in childCoordinators.enumerated() where childCoordinator === coordinator {
-            childCoordinators.remove(at: index)
-            (childCoordinator as? BaseCoordinator)?.cleanup()
-        }
-    }
+    // reset теряет актуальность, если переходить на логику с хранилищем координаторов. Оно само отфильтрует удаленные из памяти координаторы
+//    public func resetCoordinatorsStack() {
+//        for childCoordinator in childCoordinators {
+//            guard let childBaseCoordinator = childCoordinator as? BaseCoordinator else {
+//                continue
+//            }
+//            childBaseCoordinator.resetCoordinatorsStack()
+//            childBaseCoordinator.cleanup()
+//        }
+//        childCoordinators = []
+//    }
 
-    public func resetCoordinatorsStack() {
-        for childCoordinator in childCoordinators {
-            guard let childBaseCoordinator = childCoordinator as? BaseCoordinator else {
-                continue
-            }
-            childBaseCoordinator.resetCoordinatorsStack()
-            childBaseCoordinator.cleanup()
-        }
-        childCoordinators = []
-    }
+    // MARK: Handling actions
 
     public func handleCoordinatorAction(action: ActionProtocol) {
         handleAction(action: action, actionHandlers: storage.coordinatorActionHandlers)

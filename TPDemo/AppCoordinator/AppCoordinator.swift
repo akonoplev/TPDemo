@@ -11,23 +11,18 @@ import Foundation
 import TabBar
 import UIKit
 
-final class AppCoordinator: BaseCoordinator<Assembly, BaseCoordinatorContext> {
+final class AppCoordinator: WindowCoordinator<Assembly, BaseCoordinatorContext> {
 
-    private var window: UIWindow?
-    private var mainNavigationController = UINavigationController(rootViewController: UIViewController())
-
-    func start(on window: UIWindow) {
-        self.window = window
-
-        window.rootViewController = mainNavigationController
-        window.makeKeyAndVisible()
-
+    override func make() -> UIViewController? {
         startTabBar()
     }
 
-    private func startTabBar() {
-        let tabBarCoordinator: TabBarCoordinatorProtocol = Dependency.resolve(arguments: mainNavigationController)
-        startCoordinator(tabBarCoordinator)
+    private func startTabBar() -> UIViewController? {
+        let tabBarCoordinator: TabBar.TabBarCoordinator = Dependency.resolve()
+
+        start(coordinator: tabBarCoordinator, container: tabBarCoordinator.tabBarController, animated: false)
+
+        return tabBarCoordinator.root
     }
 
 

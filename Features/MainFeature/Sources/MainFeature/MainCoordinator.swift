@@ -6,12 +6,13 @@
 //
 
 import BaseArch
+import UIKit
 
-public protocol MainCoordinatorProtocol: CoordinatorProtocol {
-    var output: ActionClosure? { get set }
-}
+//public protocol MainCoordinatorProtocol: CoordinatorProtocol {
+//    var output: ActionClosure? { get set }
+//}
 
-final class MainCoordinator: BaseCoordinator<Assembly, BaseCoordinatorContext>, MainCoordinatorProtocol {
+final class MainCoordinator: NavigationCoordinator<Assembly, BaseCoordinatorContext> {
     init(
         assembly: Assembly,
         storage: CoordinatorActionHandlerStorageProtocol
@@ -21,7 +22,7 @@ final class MainCoordinator: BaseCoordinator<Assembly, BaseCoordinatorContext>, 
 
     var output: BaseArch.ActionClosure?
 
-    override func start() {
-
+    override func make() -> UIViewController? {
+        nil
     }
 }

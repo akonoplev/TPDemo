@@ -29,10 +29,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let appCoordinator = assembly.appCoordinator
 
-        let window = UIWindow()
+        let window = UIWindow(frame: UIScreen.main.bounds)
         self.window = window
 
-        appCoordinator.start(on: window)
+        appCoordinator.start(on: window, animated: false)
     }
 }
 
