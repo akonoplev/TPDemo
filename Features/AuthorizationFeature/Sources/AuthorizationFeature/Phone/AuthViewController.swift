@@ -22,7 +22,7 @@ final class AuthViewController: UIViewController, AuthViewControllerProtocol {
 
     init(presenter: AuthPresenterProtcol) {
         self.presenter = presenter
-        super.init()
+        super.init(nibName: nil, bundle: nil)
     }
     
     @available(*, unavailable)

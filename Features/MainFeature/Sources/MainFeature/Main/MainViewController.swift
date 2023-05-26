@@ -21,15 +21,28 @@ final class MainViewController: UIViewController, MainViewControllerProtocol {
 
         let button = UIButton()
         button.addTarget(self, action: #selector(showAuth), for: .touchUpInside)
+        view.addSubview(button)
+        button.backgroundColor = .white
+        button.frame = .init(x: 100, y: 100, width: 100, height: 100)
+
+        let tabBarButton = UIButton()
+        tabBarButton.addTarget(self, action: #selector(tabBar), for: .touchUpInside)
+        view.addSubview(tabBarButton)
+        tabBarButton.backgroundColor = .white
+        tabBarButton.frame = .init(x: 100, y: 300, width: 100, height: 100)
     }
 
     @objc func showAuth() {
-        print("show Auth")
+        presenter.showAuth()
+    }
+
+    @objc func tabBar() {
+        presenter.showTabBar()
     }
 
     init(presenter: MainPresenterProtcol) {
         self.presenter = presenter
-        super.init()
+        super.init(nibName: nil, bundle: nil)
     }
 
     @available(*, unavailable)

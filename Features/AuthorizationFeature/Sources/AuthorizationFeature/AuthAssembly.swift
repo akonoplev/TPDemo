@@ -7,9 +7,10 @@
 
 import BaseArch
 import DipCore
+import UIKit
 
 public enum AuthAssembly {
-    public static func setup() {
+    public static func setup(rootController: UIViewController) {
         Dependency.register { (actionClosure: ActionClosure?) in
             AuthPresenter(actionClosure: actionClosure)
         }
@@ -34,5 +35,10 @@ public enum AuthAssembly {
         }
             .implements(AuthCodeViewControllerProtocol.self)
 
+        Dependency.register {
+            AuthCoordinator(storage: Dependency.resolve(),
+                                   rootViewController: rootController)
+        }
+        .implements(AuthCoordinatorProtocol.self)
     }
 }

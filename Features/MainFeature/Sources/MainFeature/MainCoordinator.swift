@@ -6,15 +6,25 @@
 //
 
 import BaseArch
+import DipCore
+import UIKit
 
 public protocol MainCoordinatorProtocol: CoordinatorProtocol {
     var output: ActionClosure? { get set }
 }
 
 final class MainCoordinator: BaseCoordinator, MainCoordinatorProtocol {
-    var output: BaseArch.ActionClosure?
+    var output: ActionClosure?
+    weak var rootViewController: UIViewController?
+
+    init(storage: CoordinatorActionHandlerStorageProtocol, rootViewController: UIViewController) {
+        self.rootViewController = rootViewController
+        super.init(storage: storage)
+    }
 
     override func start() {
-
+        let vc: MainViewControllerProtocol = Dependency.resolve(arguments: actionClosure)
+        vc.modalPresentationStyle = .fullScreen
+        rootViewController?.present(vc, animated: false)
     }
 }

@@ -6,9 +6,10 @@
 //
 
 import DipCore
+import UIKit
 
 public enum MainAssemly {
-    public static func setup() {
+    public static func setup(rootController: UIViewController){
         Dependency.register { (actionClosure: ActionClosure?) in
             MainPresenter(actionClosure: actionClosure)
         }
@@ -20,5 +21,11 @@ public enum MainAssemly {
             )
         }
             .implements(MainViewControllerProtocol.self)
+
+        Dependency.register {
+            MainCoordinator(storage: Dependency.resolve(),
+                                                  rootViewController: rootController)
+        }
+        .implements(MainCoordinatorProtocol.self)
     }
 }

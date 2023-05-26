@@ -7,7 +7,10 @@
 
 @_exported import BaseArch
 
-protocol MainPresenterProtcol {}
+protocol MainPresenterProtcol {
+    func showAuth()
+    func showTabBar() 
+}
 
 final class MainPresenter: MainPresenterProtcol {
 
@@ -15,5 +18,14 @@ final class MainPresenter: MainPresenterProtcol {
 
     init(actionClosure: ActionClosure?) {
         self.actionClosure = actionClosure
+    }
+
+    func showAuth() {
+        actionClosure?(Action.showAuth)
+    }
+
+
+    func showTabBar() {
+        actionClosure?(Action.tabBar)
     }
 }
