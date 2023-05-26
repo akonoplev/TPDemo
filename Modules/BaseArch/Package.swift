@@ -5,6 +5,9 @@ import PackageDescription
 
 let package = Package(
     name: "BaseArch",
+    platforms: [
+        .iOS(.v14)
+    ],
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
@@ -12,11 +15,14 @@ let package = Package(
             targets: ["BaseArch"]),
     ],
     dependencies: [
+        .package(path: "./DipCore")
     ],
     targets: [
         .target(
             name: "BaseArch",
-            dependencies: []),
+            dependencies: [
+                "DipCore"
+            ]),
         .testTarget(
             name: "BaseArchTests",
             dependencies: ["BaseArch"]),

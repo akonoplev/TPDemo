@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9A7304962A1F945D001EF2BA /* ProfileFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 9A7304952A1F945D001EF2BA /* ProfileFeature */; };
+		9A7304982A1F9463001EF2BA /* MainPage in Frameworks */ = {isa = PBXBuildFile; productRef = 9A7304972A1F9463001EF2BA /* MainPage */; };
+		9AD53C802A20E7FD00212E86 /* AppCoordinator+Catalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD53C7F2A20E7FD00212E86 /* AppCoordinator+Catalog.swift */; };
+		9AD5B34D2A1E1A68005186B0 /* AppCoordinator+Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD5B34C2A1E1A68005186B0 /* AppCoordinator+Auth.swift */; };
 		9ADB23142A1B55760097259F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADB23132A1B55760097259F /* AppDelegate.swift */; };
 		9ADB231B2A1B55760097259F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9ADB23192A1B55760097259F /* Main.storyboard */; };
 		9ADB231D2A1B55780097259F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9ADB231C2A1B55780097259F /* Assets.xcassets */; };
@@ -16,13 +20,14 @@
 		9ADB233A2A1B8D590097259F /* AuthorizationFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 9ADB23392A1B8D590097259F /* AuthorizationFeature */; };
 		9ADB233C2A1B8D5F0097259F /* BaseArch in Frameworks */ = {isa = PBXBuildFile; productRef = 9ADB233B2A1B8D5F0097259F /* BaseArch */; };
 		9ADB233E2A1B8D640097259F /* DipCore in Frameworks */ = {isa = PBXBuildFile; productRef = 9ADB233D2A1B8D640097259F /* DipCore */; };
-		9ADB23402A1B8D6B0097259F /* ProfileFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 9ADB233F2A1B8D6B0097259F /* ProfileFeature */; };
 		9ADB23422A1B8D6F0097259F /* SuperCore in Frameworks */ = {isa = PBXBuildFile; productRef = 9ADB23412A1B8D6F0097259F /* SuperCore */; };
-		9ADB23442A1B8D730097259F /* MainFeature in Frameworks */ = {isa = PBXBuildFile; productRef = 9ADB23432A1B8D730097259F /* MainFeature */; };
 		9ADB23472A1B8EF90097259F /* TabBar in Frameworks */ = {isa = PBXBuildFile; productRef = 9ADB23462A1B8EF90097259F /* TabBar */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9A7304942A1F91B6001EF2BA /* MainPage */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = MainPage; path = Features/MainPage; sourceTree = "<group>"; };
+		9AD53C7F2A20E7FD00212E86 /* AppCoordinator+Catalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppCoordinator+Catalog.swift"; sourceTree = "<group>"; };
+		9AD5B34C2A1E1A68005186B0 /* AppCoordinator+Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppCoordinator+Auth.swift"; sourceTree = "<group>"; };
 		9ADB23102A1B55760097259F /* TPDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TPDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9ADB23132A1B55760097259F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9ADB231A2A1B55760097259F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -34,7 +39,6 @@
 		9ADB232C2A1B58850097259F /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		9ADB232E2A1B5B650097259F /* BaseArch */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = BaseArch; path = Modules/BaseArch; sourceTree = "<group>"; };
 		9ADB232F2A1B63ED0097259F /* AuthorizationFeature */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = AuthorizationFeature; path = Features/AuthorizationFeature; sourceTree = "<group>"; };
-		9ADB23302A1B640B0097259F /* MainFeature */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = MainFeature; path = Features/MainFeature; sourceTree = "<group>"; };
 		9ADB23312A1B64320097259F /* ProfileFeature */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = ProfileFeature; path = Features/ProfileFeature; sourceTree = "<group>"; };
 		9ADB23362A1B8A750097259F /* AppAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAssembly.swift; sourceTree = "<group>"; };
 		9ADB23452A1B8EDA0097259F /* TabBar */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = TabBar; path = Features/TabBar; sourceTree = "<group>"; };
@@ -46,18 +50,28 @@
 			buildActionMask = 2147483647;
 			files = (
 				9ADB233E2A1B8D640097259F /* DipCore in Frameworks */,
+				9A7304982A1F9463001EF2BA /* MainPage in Frameworks */,
+				9A7304962A1F945D001EF2BA /* ProfileFeature in Frameworks */,
 				9ADB233A2A1B8D590097259F /* AuthorizationFeature in Frameworks */,
 				9ADB23472A1B8EF90097259F /* TabBar in Frameworks */,
-				9ADB23442A1B8D730097259F /* MainFeature in Frameworks */,
 				9ADB233C2A1B8D5F0097259F /* BaseArch in Frameworks */,
 				9ADB23422A1B8D6F0097259F /* SuperCore in Frameworks */,
-				9ADB23402A1B8D6B0097259F /* ProfileFeature in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9AD5B3452A1DFFE8005186B0 /* AppCoordinator+Features */ = {
+			isa = PBXGroup;
+			children = (
+				9ADB232C2A1B58850097259F /* AppCoordinator.swift */,
+				9AD5B34C2A1E1A68005186B0 /* AppCoordinator+Auth.swift */,
+				9AD53C7F2A20E7FD00212E86 /* AppCoordinator+Catalog.swift */,
+			);
+			path = "AppCoordinator+Features";
+			sourceTree = "<group>";
+		};
 		9ADB23072A1B55760097259F = {
 			isa = PBXGroup;
 			children = (
@@ -79,10 +93,10 @@
 		9ADB23122A1B55760097259F /* TPDemo */ = {
 			isa = PBXGroup;
 			children = (
+				9AD5B3452A1DFFE8005186B0 /* AppCoordinator+Features */,
 				9ADB23212A1B55780097259F /* Info.plist */,
 				9ADB232B2A1B57B00097259F /* Resources */,
 				9ADB23132A1B55760097259F /* AppDelegate.swift */,
-				9ADB232C2A1B58850097259F /* AppCoordinator.swift */,
 				9ADB23362A1B8A750097259F /* AppAssembly.swift */,
 			);
 			path = TPDemo;
@@ -95,7 +109,7 @@
 				9ADB23292A1B56BC0097259F /* SuperCore */,
 				9ADB232E2A1B5B650097259F /* BaseArch */,
 				9ADB232F2A1B63ED0097259F /* AuthorizationFeature */,
-				9ADB23302A1B640B0097259F /* MainFeature */,
+				9A7304942A1F91B6001EF2BA /* MainPage */,
 				9ADB23312A1B64320097259F /* ProfileFeature */,
 				9ADB23452A1B8EDA0097259F /* TabBar */,
 			);
@@ -139,10 +153,10 @@
 				9ADB23392A1B8D590097259F /* AuthorizationFeature */,
 				9ADB233B2A1B8D5F0097259F /* BaseArch */,
 				9ADB233D2A1B8D640097259F /* DipCore */,
-				9ADB233F2A1B8D6B0097259F /* ProfileFeature */,
 				9ADB23412A1B8D6F0097259F /* SuperCore */,
-				9ADB23432A1B8D730097259F /* MainFeature */,
 				9ADB23462A1B8EF90097259F /* TabBar */,
+				9A7304952A1F945D001EF2BA /* ProfileFeature */,
+				9A7304972A1F9463001EF2BA /* MainPage */,
 			);
 			productName = TPDemo;
 			productReference = 9ADB23102A1B55760097259F /* TPDemo.app */;
@@ -199,9 +213,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9AD5B34D2A1E1A68005186B0 /* AppCoordinator+Auth.swift in Sources */,
 				9ADB23372A1B8A750097259F /* AppAssembly.swift in Sources */,
 				9ADB232D2A1B58850097259F /* AppCoordinator.swift in Sources */,
 				9ADB23142A1B55760097259F /* AppDelegate.swift in Sources */,
+				9AD53C802A20E7FD00212E86 /* AppCoordinator+Catalog.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -423,6 +439,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		9A7304952A1F945D001EF2BA /* ProfileFeature */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ProfileFeature;
+		};
+		9A7304972A1F9463001EF2BA /* MainPage */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = MainPage;
+		};
 		9ADB23392A1B8D590097259F /* AuthorizationFeature */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AuthorizationFeature;
@@ -435,17 +459,9 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = DipCore;
 		};
-		9ADB233F2A1B8D6B0097259F /* ProfileFeature */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = ProfileFeature;
-		};
 		9ADB23412A1B8D6F0097259F /* SuperCore */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SuperCore;
-		};
-		9ADB23432A1B8D730097259F /* MainFeature */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = MainFeature;
 		};
 		9ADB23462A1B8EF90097259F /* TabBar */ = {
 			isa = XCSwiftPackageProductDependency;

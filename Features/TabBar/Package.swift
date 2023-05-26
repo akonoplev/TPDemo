@@ -19,7 +19,8 @@ let package = Package(
         .package(path: "./BaseArch"),
         .package(path: "./DipCore"),
         .package(path: "./ProfileFeature"),
-        .package(path: "./MainFeature")
+        .package(path: "./MainPage"),
+//        .package(path: "./MainFeature")
     ],
     targets: [
         .target(
@@ -28,7 +29,7 @@ let package = Package(
                 "BaseArch",
                 "DipCore",
                 "ProfileFeature",
-                "MainFeature"
+                "MainPage"
             ]),
         .testTarget(
             name: "TabBarTests",

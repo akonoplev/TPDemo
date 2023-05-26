@@ -18,10 +18,10 @@ class ProfileViewModel: ObservableObject, ProfileViewModelProtocol {
     @Published
     var someValue: String = ""
 
-    private var actionClosure: ActionClosure?
-
-    init(actionClosure: ActionClosure?) {
-        self.actionClosure = actionClosure
-    }
+//    private var actionClosure: ActionClosure?
+//
+//    init(actionClosure: ActionClosure?) {
+//        self.actionClosure = actionClosure
+//    }
     
 }

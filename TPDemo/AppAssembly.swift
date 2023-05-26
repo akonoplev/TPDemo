@@ -6,14 +6,19 @@
 //
 
 import AuthorizationFeature
-import MainFeature
+import DipCore
+import MainPage
 import ProfileFeature
 import TabBar
 
 enum AppAssebly {
     static func setup() {
+
+        BaseArchAssembly.setup()
+
+        TabBarAssembly.setup()
         AuthAssembly.setup()
-        MainAssemly.setup()
+        MainPageAssemly.setup()
         ProfileAssembly.setup()
         TabBarAssembly.setup()
     }

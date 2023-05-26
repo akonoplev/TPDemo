@@ -7,32 +7,37 @@
 
 import BaseArch
 import DipCore
+import UIKit
 
 public enum AuthAssembly {
     public static func setup() {
+
+        Dependency.register { (parentViewController: UIViewController) in
+            AuthCoordinator(
+                presentViewController: parentViewController,
+                storage: Dependency.resolve()
+            )
+        }.implements(AuthCoordinatorProtocol.self)
+
         Dependency.register { (actionClosure: ActionClosure?) in
-            AuthPresenter(actionClosure: actionClosure)
+            Auth.Phone.Presenter(actionClosure: actionClosure)
         }
             .implements(AuthPresenterProtcol.self)
 
         Dependency.register { (actionClosure: ActionClosure?) in
-            AuthViewController(
+            Auth.Phone.ViewController(
                 presenter: Dependency.resolve(arguments: actionClosure)
             )
         }
             .implements(AuthViewControllerProtocol.self)
 
-        Dependency.register { (actionClosure: ActionClosure?) in
-            AuthCodePresenter(actionClosure: actionClosure)
-        }
-            .implements(AuthCodePresenterProtcol.self)
-
-        Dependency.register { (actionClosure: ActionClosure?) in
-            AuthCodeViewController(
-                presenter: Dependency.resolve(arguments: actionClosure)
+        Dependency.register { (context: Auth.Code.Context, actionClosure: ActionClosure?) in
+            Auth.Code.Builder(
+                context: context,
+                service1: Dependency.resolve(),
+                service2: Dependency.resolve(),
+                actionClosure: actionClosure
             )
-        }
-            .implements(AuthCodeViewControllerProtocol.self)
-
+        }.implements(AuthCodeBuilderProtocol.self)
     }
 }

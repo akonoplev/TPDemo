@@ -1,11 +1,11 @@
 import XCTest
-@testable import MainFeature
+@testable import MainPage
 
-final class MainFeatureTests: XCTestCase {
+final class MainPageTests: XCTestCase {
     func testExample() throws {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct
         // results.
-        XCTAssertEqual(MainFeature().text, "Hello, World!")
+        XCTAssertEqual(MainPage().text, "Hello, World!")
     }
 }

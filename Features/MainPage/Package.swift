@@ -4,29 +4,30 @@
 import PackageDescription
 
 let package = Package(
-    name: "MainFeature",
+    name: "MainPage",
     platforms: [
         .iOS(.v14)
     ],
     products: [
+        // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
-            name: "MainFeature",
-            targets: ["MainFeature"]),
+            name: "MainPage",
+            targets: ["MainPage"]),
     ],
     dependencies: [
         .package(path: "./BaseArch"),
-        .package(path: "./DipCore"),
-        
+        .package(path: "./DipCore")
     ],
     targets: [
+
         .target(
-            name: "MainFeature",
+            name: "MainPage",
             dependencies: [
                 "BaseArch",
                 "DipCore"
             ]),
         .testTarget(
-            name: "MainFeatureTests",
-            dependencies: ["MainFeature"]),
+            name: "MainPageTests",
+            dependencies: ["MainPage"]),
     ]
 )
