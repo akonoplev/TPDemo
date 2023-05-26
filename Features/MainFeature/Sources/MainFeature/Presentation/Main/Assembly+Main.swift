@@ -2,14 +2,19 @@
 //  File.swift
 //  
 //
-//  Created by Андрей Коноплев on 22.05.2023.
+//  Created by Daniil on 26.05.2023.
 //
 
 import BaseArch
 import DipCore
 
-public enum MainAssemly {
-    public static func setup() {
+extension Assembly {
+    func registerMain() {
+        Dependency.register {
+            MainCoordinator(assembly: self, storage: Dependency.resolve())
+        }
+            .implements(MainCoordinatorProtocol.self)
+
         Dependency.register { (actionClosure: ActionClosure?) in
             MainPresenter(actionClosure: actionClosure)
         }

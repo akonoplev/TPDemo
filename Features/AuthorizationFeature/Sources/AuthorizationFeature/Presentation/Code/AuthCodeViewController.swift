@@ -18,11 +18,13 @@ final class AuthCodeViewController: UIViewController, AuthCodeViewControllerProt
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        view.backgroundColor = .green
     }
 
     init(presenter: AuthCodePresenterProtcol) {
         self.presenter = presenter
-        super.init()
+        super.init(nibName: nil, bundle: nil)
     }
 
     @available(*, unavailable)

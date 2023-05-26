@@ -5,6 +5,7 @@
 //  Created by Daniil on 24.05.2023.
 //
 
+import BaseArch
 import DipCore
 import UIKit
 
@@ -17,6 +18,6 @@ extension Assembly {
                 storage: Dependency.resolve()
             )
         }
-        .implements(TabBarCoordinator.self)
+        .implements(TabBarCoordinatorProtocol.self)
     }
 }

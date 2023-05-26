@@ -6,17 +6,20 @@
 //
 
 import BaseArch
+import DipCore
 import UIKit
 
-//public protocol AuthCoordinatorProtocol: CoordinatorProtocol {
-//    var output: ActionClosure? { get set }
-//}
+public protocol AuthCoordinatorProtocol {
+    var anyCoordinator: AnyCoordinator<UINavigationController> { get }
+}
 
-final class AuthCoordinator: NavigationCoordinator<Assembly, BaseCoordinatorContext> {
-    
-    var output: ActionClosure?
+final class AuthCoordinator: NavigationCoordinator<Assembly, BaseCoordinatorContext>, AuthCoordinatorProtocol {
 
     override func make() -> UIViewController? {
-        nil
+        let actionClosure: ActionClosure? = { [weak self] _ in }
+
+        let authViewController: AuthCodeViewControllerProtocol = Dependency.resolve(arguments: actionClosure)
+        
+        return authViewController
     }
 }

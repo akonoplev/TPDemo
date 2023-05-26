@@ -1,5 +1,5 @@
 //
-//  AuthPresenterProtocol.swift
+//  AuthPhonePresenter.swift
 //  
 //
 //  Created by Андрей Коноплев on 22.05.2023.
@@ -7,9 +7,9 @@
 
 import BaseArch
 
-protocol AuthPresenterProtcol {}
+protocol AuthPhonePresenterProtocol {}
 
-final class AuthPresenter: AuthPresenterProtcol {
+final class AuthPhonePresenter: AuthPhonePresenterProtocol {
 
     private let actionClosure: ActionClosure?
 

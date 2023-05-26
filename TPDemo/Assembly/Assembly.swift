@@ -33,5 +33,6 @@ final class Assembly {
     
     private func register() {
         registerManagers()
+        registerNavigation()
     }
 }

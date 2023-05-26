@@ -12,23 +12,16 @@ import TabBar
 import UIKit
 
 final class AppCoordinator: WindowCoordinator<Assembly, BaseCoordinatorContext> {
-
     override func make() -> UIViewController? {
         startTabBar()
     }
 
     private func startTabBar() -> UIViewController? {
-        let tabBarCoordinator: TabBar.TabBarCoordinator = Dependency.resolve()
+        let tabBarCoordinator: TabBar.TabBarCoordinatorProtocol = Dependency.resolve()
+        let tabBarController: UITabBarController = Dependency.resolve(tag: TabController.root)
 
-        start(coordinator: tabBarCoordinator, container: tabBarCoordinator.tabBarController, animated: false)
+        start(coordinator: tabBarCoordinator.anyCoordinator, container: tabBarController, animated: false)
 
-        return tabBarCoordinator.root
+        return tabBarCoordinator.anyCoordinator.root
     }
-
-
-    // Feature1
-    // Feature2
-
-    // Feature3 -> output (show Feature 1)
-    // func feature1()
 }

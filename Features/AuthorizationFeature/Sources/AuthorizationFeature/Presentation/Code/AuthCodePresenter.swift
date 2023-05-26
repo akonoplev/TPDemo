@@ -10,7 +10,7 @@ import BaseArch
 
 protocol AuthCodePresenterProtcol {}
 
-final class AuthCodePresenter: AuthPresenterProtcol {
+final class AuthCodePresenter: AuthCodePresenterProtcol {
     
     private let actionClosure: ActionClosure?
 

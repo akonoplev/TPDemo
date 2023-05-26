@@ -28,6 +28,7 @@
 		A50147A32A1E22FC00222D34 /* AppCoordinator+Authorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50147A22A1E22FC00222D34 /* AppCoordinator+Authorization.swift */; };
 		A50147A52A1E230900222D34 /* AppCoordinator+TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50147A42A1E230900222D34 /* AppCoordinator+TabBar.swift */; };
 		A50147A72A1E335C00222D34 /* Assembly+Managers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50147A62A1E335C00222D34 /* Assembly+Managers.swift */; };
+		A5C824DC2A20E0D900C84114 /* Assembly+Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C824DB2A20E0D900C84114 /* Assembly+Navigation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		A50147A22A1E22FC00222D34 /* AppCoordinator+Authorization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppCoordinator+Authorization.swift"; sourceTree = "<group>"; };
 		A50147A42A1E230900222D34 /* AppCoordinator+TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppCoordinator+TabBar.swift"; sourceTree = "<group>"; };
 		A50147A62A1E335C00222D34 /* Assembly+Managers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Assembly+Managers.swift"; sourceTree = "<group>"; };
+		A5C824DB2A20E0D900C84114 /* Assembly+Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Assembly+Navigation.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,11 +97,11 @@
 		9ADB23122A1B55760097259F /* TPDemo */ = {
 			isa = PBXGroup;
 			children = (
+				9ADB23212A1B55780097259F /* Info.plist */,
+				9ADB23132A1B55760097259F /* AppDelegate.swift */,
 				A501479D2A1E1F1000222D34 /* AppCoordinator */,
 				A50147942A1E1AEA00222D34 /* Assembly */,
-				9ADB23212A1B55780097259F /* Info.plist */,
 				9ADB232B2A1B57B00097259F /* Resources */,
-				9ADB23132A1B55760097259F /* AppDelegate.swift */,
 			);
 			path = TPDemo;
 			sourceTree = "<group>";
@@ -143,6 +145,7 @@
 				A50147992A1E1C2E00222D34 /* Assembly+Profile.swift */,
 				A501479B2A1E1C3900222D34 /* Assembly+Authorization.swift */,
 				A50147A62A1E335C00222D34 /* Assembly+Managers.swift */,
+				A5C824DB2A20E0D900C84114 /* Assembly+Navigation.swift */,
 			);
 			path = Assembly;
 			sourceTree = "<group>";
@@ -243,6 +246,7 @@
 				A50147A12A1E22F200222D34 /* AppCoordinator+Profile.swift in Sources */,
 				A50147A72A1E335C00222D34 /* Assembly+Managers.swift in Sources */,
 				9ADB23372A1B8A750097259F /* Assembly.swift in Sources */,
+				A5C824DC2A20E0D900C84114 /* Assembly+Navigation.swift in Sources */,
 				9ADB232D2A1B58850097259F /* AppCoordinator.swift in Sources */,
 				A50147982A1E1C2400222D34 /* Assembly+Main.swift in Sources */,
 				A50147A52A1E230900222D34 /* AppCoordinator+TabBar.swift in Sources */,

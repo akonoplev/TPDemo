@@ -7,7 +7,9 @@
 
 import BaseArch
 
-protocol MainPresenterProtcol {}
+protocol MainPresenterProtcol {
+    func showAuth()
+}
 
 final class MainPresenter: MainPresenterProtcol {
 
@@ -15,5 +17,9 @@ final class MainPresenter: MainPresenterProtcol {
 
     init(actionClosure: ActionClosure?) {
         self.actionClosure = actionClosure
+    }
+
+    func showAuth() {
+        actionClosure?(MainAction.didTapToButton)
     }
 }

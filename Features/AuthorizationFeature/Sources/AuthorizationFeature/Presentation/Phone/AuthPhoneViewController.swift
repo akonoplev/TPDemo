@@ -8,19 +8,19 @@
 import Foundation
 import UIKit
 
-protocol AuthViewControllerProtocol: UIViewController {
+protocol AuthPhoneViewControllerProtocol: UIViewController {
 
 }
 
-final class AuthViewController: UIViewController, AuthViewControllerProtocol {
+final class AuthPhoneViewController: UIViewController, AuthPhoneViewControllerProtocol {
 
-    private let presenter: AuthPresenterProtcol
+    private let presenter: AuthPhonePresenterProtocol
 
     override func viewDidLoad() {
         super.viewDidLoad()
     }
 
-    init(presenter: AuthPresenterProtcol) {
+    init(presenter: AuthPhonePresenterProtocol) {
         self.presenter = presenter
         super.init()
     }
