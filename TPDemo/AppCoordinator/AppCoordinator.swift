@@ -17,8 +17,12 @@ final class AppCoordinator: WindowCoordinator<Assembly, BaseCoordinatorContext> 
     }
 
     private func startTabBar() -> UIViewController? {
-        let tabBarCoordinator: TabBar.TabBarCoordinatorProtocol = Dependency.resolve()
-        let tabBarController: UITabBarController = Dependency.resolve(tag: TabController.root)
+        guard let assembly = assembly else {
+            return nil
+        }
+
+        let tabBarCoordinator = assembly.tabBarAssembly.resolver.tabBarCoordinator()
+        let tabBarController: UITabBarController = assembly.resolver.rootTabBarController()
 
         start(coordinator: tabBarCoordinator.anyCoordinator, container: tabBarController, animated: false)
 

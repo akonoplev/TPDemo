@@ -20,12 +20,14 @@ final class MainViewController: UIViewController, MainViewControllerProtocol {
         super.viewDidLoad()
 
         let button = UIButton()
-        button.backgroundColor = .blue
+        button.backgroundColor = .gray
+        button.setTitle("К авторизации", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
+        
         view.addSubview(button)
 
         NSLayoutConstraint.activate([
-            button.widthAnchor.constraint(equalToConstant: 60),
+            button.widthAnchor.constraint(equalToConstant: 200),
             button.heightAnchor.constraint(equalToConstant: 30),
             button.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             button.centerYAnchor.constraint(equalTo: view.centerYAnchor)
@@ -42,7 +44,8 @@ final class MainViewController: UIViewController, MainViewControllerProtocol {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
         
-        view.backgroundColor = .red
+        view.backgroundColor = .yellow
+        title = "Главная"
     }
 
     @available(*, unavailable)

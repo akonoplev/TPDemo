@@ -13,17 +13,26 @@ import UIKit
 import TabBar
 
 extension AppCoordinator: TabBar.OutputRoutes {
-    func mainCoordinator() -> AnyCoordinator<UINavigationController> {
-        let mainCoordinator: MainFeature.MainCoordinatorProtocol = Dependency.resolve()
-        let navigationController: UINavigationController = Dependency.resolve(tag: Tab.main)
+    func mainCoordinator() -> AnyCoordinator<UINavigationController>? {
+        guard let assembly = assembly else {
+            return nil
+        }
 
-        mainCoordinator.anyCoordinator.start(on: navigationController, animated: false)
+        let mainCoordinator = assembly.mainAssembly.resolver.mainCoordinator()
+
+        mainCoordinator.anyCoordinator.start(on: assembly.resolver.mainNavigationController(), animated: false)
 
         return mainCoordinator.anyCoordinator
     }
 
-    func profileCoordinator() -> AnyCoordinator<UINavigationController> {
-        let profileCoordinator: ProfileFeature.ProfileCoordinatorProtocol = Dependency.resolve()
+    func profileCoordinator() -> AnyCoordinator<UINavigationController>? {
+        guard let assembly = assembly else {
+            return nil
+        }
+
+        let profileCoordinator = assembly.profileAssembly.resolver.profileCoordinator(name: "Валера").anyCoordinator
+
+        profileCoordinator.anyCoordinator.start(on: assembly.resolver.profileNavigationController(), animated: false)
 
         return profileCoordinator.anyCoordinator
     }

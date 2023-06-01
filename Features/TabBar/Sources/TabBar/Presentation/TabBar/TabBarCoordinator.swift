@@ -13,17 +13,18 @@ public protocol TabBarCoordinatorProtocol {
 }
 
 public final class TabBarCoordinator: TabbarCoordinator<Assembly, BaseCoordinatorContext>, TabBarCoordinatorProtocol {
-    
-    // TODO: Сделать наследников BaseCoordinator типа TabbarCoordinator с заготовленным рутовым контроллером
-    // По аналогии сделать NavigationCoordinator и ModalCoordinator. Мб еще WindowCoordinator какой-нибудь
-    // Или с любым другом типом представления. Даже можно попробовать SUICoordinator, который через
-    // HostingController открывает SUI контент
-
     override public func make() -> BasePresentableCollection<UIViewController>? {
-        guard let mainController = assembly?.outputRoutes.mainCoordinator().root else {
+        guard
+            let assembly = assembly,
+            let mainController = assembly.outputRoutes.mainCoordinator()?.root,
+            let profileController = assembly.outputRoutes.profileCoordinator()?.root
+        else {
             return nil
         }
+        
+        mainController.tabBarItem = UITabBarItem(title: "Главная", image: UIImage(systemName: "m.square.fill"), tag: 0)
+        profileController.tabBarItem = UITabBarItem(title: "Профиль", image: UIImage(systemName: "person.fill"), tag: 1)
 
-        return .init(items: [mainController])
+        return .init(items: [mainController, profileController])
     }
 }

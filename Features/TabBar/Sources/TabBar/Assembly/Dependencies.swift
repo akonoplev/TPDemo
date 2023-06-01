@@ -7,6 +7,4 @@
 
 import Foundation
 
-public protocol Dependencies {
-
-}
+public protocol Dependencies {}

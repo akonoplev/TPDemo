@@ -7,4 +7,4 @@
 
 import UIKit
 
-public typealias WindowCoordinator<Assembly: AnyObject, Context> = BaseCoordinator<Assembly, Context, UIWindow>
+public typealias WindowCoordinator<Assembly: AnyObject, Context> = BaseCoordinator<Assembly, Context, UIWindow> & WindowRoutes

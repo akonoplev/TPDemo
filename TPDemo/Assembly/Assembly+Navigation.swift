@@ -14,6 +14,7 @@ enum TabController: String, DependencyTag {
 
 enum Tab: Int, DependencyTag {
     case main
+    case profile
 }
 
 extension Assembly {
@@ -23,7 +24,12 @@ extension Assembly {
         }
         .implements(UITabBarController.self)
 
-        Dependency.register(tag: Tab.main) {
+        Dependency.register(.singleton, tag: Tab.main) {
+            UINavigationController(rootViewController: UIViewController())
+        }
+        .implements(UINavigationController.self)
+
+        Dependency.register(.singleton, tag: Tab.profile) {
             UINavigationController(rootViewController: UIViewController())
         }
         .implements(UINavigationController.self)

@@ -9,18 +9,15 @@ import BaseArch
 import Combine
 import SwiftUI
 
-protocol ProfileViewModelProtocol {
-
-}
-
-class ProfileViewModel: ObservableObject, ProfileViewModelProtocol {
+final class ProfileViewModel: ObservableObject {
 
     @Published
-    var someValue: String = ""
+    var name: String = ""
 
     private var actionClosure: ActionClosure?
 
-    init(actionClosure: ActionClosure?) {
+    init(name: String, actionClosure: ActionClosure?) {
+        self.name = name
         self.actionClosure = actionClosure
     }
     

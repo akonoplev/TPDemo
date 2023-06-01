@@ -6,8 +6,9 @@
 //
 
 import BaseArch
+import SuperCore
 import UIKit
 
 public protocol OutputRoutes {
-    func authCoordinator() -> AnyCoordinator<UINavigationController>
+    func authCoordinator(finish: @escaping VoidClosure) -> AnyCoordinator<UINavigationController>?
 }

@@ -24,16 +24,19 @@ final class MainCoordinator: NavigationCoordinator<Assembly, BaseCoordinatorCont
             }
         }
 
-        let mainController: MainViewControllerProtocol = Dependency.resolve(arguments: actionClosure)
-
-        return mainController
+        return assembly?.resolver.mainController(actionClosure: actionClosure)
     }
 
     private func showAuth() {
-        guard let coordinator = assembly?.outputRoutes.authCoordinator() else {
+        guard let assembly = assembly else {
             return
         }
 
-        start(coordinator: coordinator, container: root, animated: true)
+        let rootController = UINavigationController(rootViewController: UIViewController())
+        let coordinator = assembly.outputRoutes.authCoordinator(finish: { [weak rootController] in
+            rootController?.dismiss(animated: true)
+        })
+
+        present(coordinator: coordinator, rootController: rootController, animated: true)
     }
 }

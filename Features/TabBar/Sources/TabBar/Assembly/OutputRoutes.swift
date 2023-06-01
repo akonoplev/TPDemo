@@ -9,6 +9,6 @@ import BaseArch
 import UIKit
 
 public protocol OutputRoutes {
-    func mainCoordinator() -> AnyCoordinator<UINavigationController>
-    func profileCoordinator() -> AnyCoordinator<UINavigationController>
+    func mainCoordinator() -> AnyCoordinator<UINavigationController>?
+    func profileCoordinator() -> AnyCoordinator<UINavigationController>?
 }

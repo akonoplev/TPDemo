@@ -7,4 +7,4 @@
 
 import UIKit
 
-public typealias NavigationCoordinator<Assembly: AnyObject, Context> = BaseCoordinator<Assembly, Context, UINavigationController>
+public typealias NavigationCoordinator<Assembly: AnyObject, Context> = BaseCoordinator<Assembly, Context, UINavigationController> & NavigationRoutes & PresentRoutes

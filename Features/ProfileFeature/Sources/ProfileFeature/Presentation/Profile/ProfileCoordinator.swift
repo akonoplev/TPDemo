@@ -13,8 +13,20 @@ public protocol ProfileCoordinatorProtocol {
     var anyCoordinator: AnyCoordinator<UINavigationController> { get }
 }
 
-final class ProfileCoordinator: NavigationCoordinator<Assembly, BaseCoordinatorContext>, ProfileCoordinatorProtocol {
+final class ProfileCoordinator: NavigationCoordinator<Assembly, ProfileCoordinator.Context>, ProfileCoordinatorProtocol {
+    struct Context {
+        let name: String
+    }
+    
     override func make() -> UIViewController? {
-        nil
+        guard let assembly = assembly else {
+            return nil
+        }
+
+        let actionClosure: ActionClosure? = { [weak self] _ in }
+        
+        let profileVC = assembly.resolver.profileBuilder(name: context.name, actionClosure: actionClosure).build()
+
+        return profileVC
     }
 }
