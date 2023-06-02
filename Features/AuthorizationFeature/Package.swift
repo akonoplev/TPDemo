@@ -9,7 +9,6 @@ let package = Package(
         .iOS(.v14)
     ],
     products: [
-
         .library(
             name: "AuthorizationFeature",
             targets: ["AuthorizationFeature"]),

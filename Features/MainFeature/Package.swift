@@ -16,6 +16,7 @@ let package = Package(
     dependencies: [
         .package(path: "./BaseArch"),
         .package(path: "./DipCore"),
+        .package(path: "./SuperCore")
         
     ],
     targets: [
@@ -23,7 +24,8 @@ let package = Package(
             name: "MainFeature",
             dependencies: [
                 "BaseArch",
-                "DipCore"
+                "DipCore",
+                "SuperCore"
             ]),
         .testTarget(
             name: "MainFeatureTests",

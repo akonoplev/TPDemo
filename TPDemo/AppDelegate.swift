@@ -5,6 +5,8 @@
 //  Created by Андрей Коноплев on 22.05.2023.
 //
 
+import BaseArch
+import DipCore
 import UIKit
 
 @UIApplicationMain
@@ -12,17 +14,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    private let appCoordinator = AppCoordinator()
+    private var assembly: Assembly?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-
-        AppAssebly.setup()
         
-        let window = UIWindow()
-        self.window = window
-        appCoordinator.start(on: window)
+        initialSetup()
 
         return true
+    }
+    
+    private func initialSetup() {
+        let assembly = Assembly()
+        self.assembly = assembly
+
+        let appCoordinator = assembly.appCoordinator
+
+        let window = UIWindow(frame: UIScreen.main.bounds)
+        self.window = window
+
+        appCoordinator.start(on: window, animated: false)
     }
 }
 
