@@ -17,9 +17,9 @@ extension Assembly {
 
     private func registerAuthCode() {
         Dependency.register {
-            AuthCodeCoordinator(assembly: self, context: .init(phone: $0, finish: $1), storage: Dependency.resolve())
+            AuthCoordinator(assembly: self, context: .init(phone: $0, finish: $1), storage: Dependency.resolve())
         }
-            .implements(AuthCodeCoordinatorProtocol.self)
+            .implements(AuthCoordinatorProtocol.self)
 
         Dependency.register { [unowned self] (phone: String, finish: @escaping VoidClosure, actionClosure: ActionClosure?) in
             AuthCodeBuilder(

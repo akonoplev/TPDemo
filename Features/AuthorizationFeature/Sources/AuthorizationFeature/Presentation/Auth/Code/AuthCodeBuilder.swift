@@ -12,7 +12,7 @@ import UIKit
 
 protocol AuthCodeBuilderProtocol: BuilderProtocol {}
 
-final class AuthCodeBuilder: BaseBuilder<AuthCodeCoordinator.Context>, AuthCodeBuilderProtocol {
+final class AuthCodeBuilder: BaseBuilder<AuthCoordinator.Context>, AuthCodeBuilderProtocol {
     override func build() -> UIViewController {
         let viewModel = AuthCodeViewModel(phone: context.phone,
                                   service1: "", // здесь будет что-то типа resolver.service1()

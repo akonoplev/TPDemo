@@ -8,9 +8,7 @@
 import Foundation
 import UIKit
 
-protocol MainViewControllerProtocol: UIViewController {
-
-}
+protocol MainViewControllerProtocol: UIViewController {}
 
 final class MainViewController: UIViewController, MainViewControllerProtocol {
 

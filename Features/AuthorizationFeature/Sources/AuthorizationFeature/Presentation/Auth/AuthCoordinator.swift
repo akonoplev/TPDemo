@@ -10,18 +10,14 @@ import DipCore
 import SuperCore
 import UIKit
 
-public protocol AuthCodeCoordinatorProtocol {
+public protocol AuthCoordinatorProtocol {
     var anyCoordinator: AnyCoordinator<UINavigationController> { get }
 }
 
-final class AuthCodeCoordinator: NavigationCoordinator<Assembly, AuthCodeCoordinator.Context>, AuthCodeCoordinatorProtocol {
+final class AuthCoordinator: NavigationCoordinator<Assembly, AuthCoordinator.Context>, AuthCoordinatorProtocol {
     struct Context {
         let phone: String
         let finish: VoidClosure
-    }
-
-    deinit {
-        print("xxxxx")
     }
 
     override func make() -> UIViewController? {

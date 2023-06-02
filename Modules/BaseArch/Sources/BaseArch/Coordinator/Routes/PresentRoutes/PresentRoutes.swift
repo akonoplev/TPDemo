@@ -33,4 +33,13 @@ public extension PresentRoutes {
     ) where Coordinator.Root.Module == AnyCoordinator<UINavigationController> {
         present(coordinator: coordinator?.activate(), rootController: rootController, animated: animated, completion: completion)
     }
+
+    func present(
+        viewController: UIViewController,
+        animated: Bool,
+        completion: (() -> Void)? = nil
+    ) {
+        let presentingController = presenting?.topPresentedController ?? presenting
+        presentingController?.present(viewController, animated: animated, completion: completion)
+    }
 }
