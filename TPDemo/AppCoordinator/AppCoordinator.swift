@@ -8,6 +8,7 @@
 import BaseArch
 import DipCore
 import Foundation
+import SuperCore
 import TabBar
 import UIKit
 
@@ -27,5 +28,10 @@ final class AppCoordinator: WindowCoordinator<Assembly, BaseCoordinatorContext> 
         start(coordinator: tabBarCoordinator.anyCoordinator, container: tabBarController, animated: false)
 
         return tabBarCoordinator.anyCoordinator.root
+    }
+
+    // MARK: - integration of Auth feature module
+    func authCoordinator(finish: @escaping VoidClosure) -> AnyCoordinator<UINavigationController>? {
+        assembly?.authorizationAssembly.resolver.authCodeCoordinator(phone: "88005553535", finish: finish).anyCoordinator
     }
 }

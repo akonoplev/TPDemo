@@ -32,7 +32,7 @@ final class MainCoordinator: NavigationCoordinator<Assembly, BaseCoordinatorCont
             return
         }
 
-        let rootController = UINavigationController(rootViewController: UIViewController())
+        let rootController = UINavigationController()
         let coordinator = assembly.outputRoutes.authCoordinator(finish: { [weak rootController] in
             rootController?.dismiss(animated: true)
         })

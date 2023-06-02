@@ -20,6 +20,10 @@ final class AuthCodeCoordinator: NavigationCoordinator<Assembly, AuthCodeCoordin
         let finish: VoidClosure
     }
 
+    deinit {
+        print("xxxxx")
+    }
+
     override func make() -> UIViewController? {
         guard let assembly = assembly else {
             return nil
@@ -48,6 +52,8 @@ final class AuthCodeCoordinator: NavigationCoordinator<Assembly, AuthCodeCoordin
             return
         }
 
-        push(coordinator: assembly.resolver.authPhoneCoordinator().anyCoordinator, animated: true)
+        let actionClosure: ActionClosure? = { [weak self] _ in }
+
+        push(viewController: assembly.resolver.authPhoneController(actionClosure: actionClosure), animated: true)
     }
 }

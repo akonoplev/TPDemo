@@ -14,22 +14,11 @@ public protocol NavigationRoutes {
 }
 
 public extension NavigationRoutes {
-    func push<Coordinator: CoreCoordinator>(
-        coordinator: Coordinator?,
+    func push(
+        viewController: UIViewController,
         animated: Bool
-    ) where Coordinator.Root == UINavigationController {
-        coordinator?.root = navigationController
-
-        if let controller = coordinator?.activate() {
-            navigationController?.pushViewController(controller, animated: animated)
-        }
-    }
-
-    func push<Coordinator: CoreCoordinator>(
-        coordinator: Coordinator?,
-        animated: Bool
-    ) where Coordinator.Root.Module == AnyCoordinator<UINavigationController> {
-        push(coordinator: coordinator?.activate(), animated: animated)
+    ) {
+        navigationController?.pushViewController(viewController, animated: animated)
     }
 
     func replaceWith<Coordinator: CoreCoordinator>(

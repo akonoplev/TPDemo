@@ -13,10 +13,6 @@ public extension ResolverProtocol {
     func authCodeCoordinator(phone: String, finish: @escaping VoidClosure) -> AuthCodeCoordinatorProtocol {
         Dependency.resolve(arguments: phone, finish)
     }
-
-    func authPhoneCoordinator() -> AuthPhoneCoordinatorProtocol {
-        Dependency.resolve()
-    }
 }
 
 extension ResolverProtocol {

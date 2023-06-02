@@ -32,10 +32,6 @@ extension Assembly {
     }
 
     private func registerAuthPhone() {
-        Dependency.register {
-            AuthPhoneCoordinator(assembly: self, storage: Dependency.resolve())
-        }
-            .implements(AuthPhoneCoordinatorProtocol.self)
 
         Dependency.register { (actionClosure: ActionClosure?) in
             AuthPhonePresenter(actionClosure: actionClosure)

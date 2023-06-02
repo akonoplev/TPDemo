@@ -13,7 +13,5 @@ import SuperCore
 import UIKit
 
 extension AppCoordinator: MainFeature.OutputRoutes {
-    func authCoordinator(finish: @escaping VoidClosure) -> BaseArch.AnyCoordinator<UINavigationController>? {
-        assembly?.authorizationAssembly.resolver.authCodeCoordinator(phone: "88005553535", finish: finish).anyCoordinator
-    }
+
 }
