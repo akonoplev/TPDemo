@@ -7,4 +7,4 @@
 
 import UIKit
 
-public typealias TabbarCoordinator<Assembly: AnyObject, Context> = BaseCoordinator<Assembly, Context, UITabBarController>
+public typealias TabbarCoordinator<Assembly: AnyObject, Context> = BaseCoordinator<Assembly, Context, UITabBarController> & TabBarRoutes

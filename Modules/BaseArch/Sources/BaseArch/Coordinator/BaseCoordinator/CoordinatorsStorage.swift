@@ -26,36 +26,30 @@ public class CoordinatorsStorage {
 
     struct Item {
         let coordinator: Coordinator
-        weak var module: CorePresentable?
+        var modules: [CorePresentable?]
     }
 
-    func save(coordinator: Coordinator, module: CorePresentable?) {
+    func save(coordinator: Coordinator, modules: [CorePresentable]?) {
         // Подчистка несуществующих координаторов
         prepare()
-
-        if module is Coordinator {
-            return
-        }
 
         // Непоказываемый вариант координатора, пока не актуально
 //        if coordinator is AnyCoordinator<DemonRootController> {
 //            return
 //        }
 
-        if let module = module {
-            let newItem = Item(coordinator: coordinator, module: module)
-
+        if let modules = modules {
             // Проверка на повторный старт координатора
             if let index = cache.firstIndex(where: { $0.coordinator === coordinator }) {
-                cache[index] = newItem
+                cache[index].modules = modules
             } else {
-                cache.append(Item(coordinator: coordinator, module: module))
+                cache.append(Item(coordinator: coordinator, modules: modules))
             }
         }
     }
 
-    func module(for coordinator: Coordinator) -> CorePresentable? {
-        cache.first(where: { $0.coordinator.isEqual(other: coordinator) })?.module
+    func modules(for coordinator: Coordinator) -> [CorePresentable?] {
+        cache.first(where: { $0.coordinator.isEqual(other: coordinator) })?.modules ?? []
     }
 
     // MARK: Private
@@ -64,7 +58,7 @@ public class CoordinatorsStorage {
 
     private func prepare() {
         cache = cache.filter {
-            if $0.module == nil {
+            if $0.modules.isEmpty {
                 return false
             }
 

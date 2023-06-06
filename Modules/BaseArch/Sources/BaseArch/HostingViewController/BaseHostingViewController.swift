@@ -18,4 +18,12 @@ open class BaseHostingViewController<Content: View>: UIHostingController<Content
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    deinit {
+        print("Base hosting VC was deinited")
+    }
+
+    open override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+    }
 }

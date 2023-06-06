@@ -31,8 +31,8 @@ public class AnyCoordinator<Root: RootController>: CoreCoordinator {
         }
     }
 
-    public func make() -> Root.Module? {
-        _box?.make()
+    public func start() {
+        _box?.start()
     }
 
     public func isEqual(other: Coordinator) -> Bool {
@@ -49,7 +49,7 @@ public class AnyCoordinator<Root: RootController>: CoreCoordinator {
 private class _AnyCoordinatorBox<Root: RootController>: CoreCoordinator {
     var root: Root?
 
-    func make() -> Root.Module? {
+    func start() {
         fatalError("This method is abstract")
     }
 
@@ -80,8 +80,8 @@ private class _CoordinatorBox<Base: CoreCoordinator>: _AnyCoordinatorBox<Base.Ro
         }
     }
 
-    override func make() -> Base.Root.Module? {
-        _base.make()
+    override func start() {
+        _base.start()
     }
 
     override func isEqual(other: Coordinator) -> Bool {

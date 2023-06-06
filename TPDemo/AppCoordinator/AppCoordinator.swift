@@ -18,21 +18,17 @@ import TabBar
 import UIKit
 
 final class AppCoordinator: WindowCoordinator<Assembly, BaseCoordinatorContext> {
-    override func make() -> UIViewController? {
-        startTabBar()
-    }
-
-    private func startTabBar() -> UIViewController? {
+    override func start() {
         guard let assembly = assembly else {
-            return nil
+            return
         }
 
         let tabBarCoordinator = assembly.tabBarAssembly.resolver.tabBarCoordinator()
         let tabBarController: UITabBarController = assembly.resolver.rootTabBarController()
 
-        start(coordinator: tabBarCoordinator.anyCoordinator, container: tabBarController, animated: false)
+        tabBarCoordinator.anyCoordinator.set(container: tabBarController)
 
-        return tabBarCoordinator.anyCoordinator.root
+        start(coordinator: tabBarCoordinator.anyCoordinator)
     }
 
     // MARK: - integration of Auth feature module
@@ -49,7 +45,7 @@ final class AppCoordinator: WindowCoordinator<Assembly, BaseCoordinatorContext> 
 
         let mainCoordinator = assembly.mainAssembly.resolver.mainCoordinator()
 
-        mainCoordinator.anyCoordinator.start(on: assembly.resolver.mainNavigationController(), animated: false)
+        mainCoordinator.anyCoordinator.set(container: assembly.resolver.mainNavigationController())
 
         return mainCoordinator.anyCoordinator
     }
@@ -63,7 +59,7 @@ final class AppCoordinator: WindowCoordinator<Assembly, BaseCoordinatorContext> 
 
         let profileCoordinator = assembly.profileAssembly.resolver.profileCoordinator(name: "Ваше имя: Форрест Гамп").anyCoordinator
 
-        profileCoordinator.anyCoordinator.start(on: assembly.resolver.profileNavigationController(), animated: false)
+        profileCoordinator.anyCoordinator.set(container: assembly.resolver.profileNavigationController())
 
         return profileCoordinator.anyCoordinator
     }

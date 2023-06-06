@@ -14,7 +14,11 @@ public protocol MainCoordinatorProtocol {
 }
 
 final class MainCoordinator: NavigationCoordinator<Assembly, BaseCoordinatorContext>, MainCoordinatorProtocol {
-    override func make() -> UIViewController? {
+    override func start() {
+        guard let assembly = assembly else {
+            return
+        }
+
         let actionClosure: ActionClosure? = { [weak self] action in
             self?.handleModuleAction(action: action) { (action: MainAction, _) in
                 switch action {
@@ -24,7 +28,7 @@ final class MainCoordinator: NavigationCoordinator<Assembly, BaseCoordinatorCont
             }
         }
 
-        return assembly?.resolver.mainController(actionClosure: actionClosure)
+        set(viewControllers: [assembly.resolver.mainController(actionClosure: actionClosure)], animated: false)
     }
 
     private func showAuth() {
@@ -33,8 +37,8 @@ final class MainCoordinator: NavigationCoordinator<Assembly, BaseCoordinatorCont
         }
 
         let rootController = UINavigationController()
-        let coordinator = assembly.outputRoutes.authCoordinator(finish: { [weak rootController] in
-            rootController?.dismiss(animated: true)
+        let coordinator = assembly.outputRoutes.authCoordinator(finish: { [weak self] in
+            self?.dismiss(animated: true)
         })
 
         present(coordinator: coordinator, rootController: rootController, animated: true)

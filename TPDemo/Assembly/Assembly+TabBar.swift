@@ -7,6 +7,4 @@
 
 import TabBar
 
-extension Assembly: TabBar.Dependencies {
-    
-}
+extension Assembly: TabBar.Dependencies {}

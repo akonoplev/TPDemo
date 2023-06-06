@@ -14,52 +14,43 @@ public protocol CoreCoordinator: Coordinator, CorePresentable {
 
     var root: Root? { get set }
 
-    func make() -> Root.Module?
+    func start()
 }
 
 public extension CoreCoordinator {
-    func activate() -> Root.Module? {
-        let module = make()
-        CoordinatorsStorage.shared.save(coordinator: self, module: module)
-        return module
+    func activate(container: Root.Module) {
+        CoordinatorsStorage.shared.save(coordinator: self, modules: [container])
     }
 
-    func start(on container: Root?, animated: Bool) {
+    func activate(containers: [Root.Module]) {
+        CoordinatorsStorage.shared.save(coordinator: self, modules: containers)
+    }
+
+    /// Вызывать у стартуемого координатора
+    /// container - rootController, на котором происходит запуск
+    func start(on container: Root?) {
         guard let container = container else {
             return
         }
 
         root = container
 
-        if let module = activate() {
-            container.start(module: module, animated: animated)
-        }
+        start()
     }
 
-    func add(to container: Root?, animated: Bool) {
-        guard let container = container else {
-            return
-        }
-
-        root = container
-
-        if let module = activate() {
-            container.add(module: module, animated: animated)
-        }
-    }
-
-    @discardableResult
+    /// Вызывает стартуемый coordinator из контекста другого coordinator
+    /// Передает root автоматически из текущего координатора
     func start<Coordinator: CoreCoordinator>(
         coordinator: Coordinator,
         animated: Bool
-    ) -> Coordinator.Root? {
-        if let module = coordinator.activate() {
-            coordinator.root?.start(module: module, animated: animated)
-        }
+    ) where Coordinator.Root == Root {
+        coordinator.root = root
 
-        return coordinator.root
+        coordinator.start()
     }
 
+    /// Вызывает стартуемый coordinator на передаваемом container
+    /// container - rootController, на котором происходит запуск
     func start<Coordinator: CoreCoordinator>(
         coordinator: Coordinator,
         container: Coordinator.Root?,
@@ -71,8 +62,10 @@ public extension CoreCoordinator {
 
         coordinator.root = container
 
-        if let module = coordinator.activate() {
-            container.start(module: module, animated: animated)
-        }
+        coordinator.start()
+    }
+
+    func set(container: Root) {
+        root = container
     }
 }

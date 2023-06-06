@@ -19,10 +19,14 @@ final class AuthCoordinator: NavigationCoordinator<Assembly, AuthCoordinator.Con
         let phone: String
         let finish: VoidClosure
     }
+    
+    deinit {
+        print("some shit")
+    }
 
-    override func make() -> UIViewController? {
+    override func start() {
         guard let assembly = assembly else {
-            return nil
+            return
         }
 
         let actionClosure: ActionClosure? = { [weak self] action in
@@ -40,7 +44,10 @@ final class AuthCoordinator: NavigationCoordinator<Assembly, AuthCoordinator.Con
             }
         }
 
-        return assembly.resolver.authCodeBuilder(phone: context.phone, finish: context.finish, actionClosure: actionClosure).build()
+        set(
+            viewControllers: [assembly.resolver.authCodeBuilder(phone: context.phone, finish: context.finish, actionClosure: actionClosure).build()],
+            animated: false
+        )
     }
 
     private func showPhoneAuth() {

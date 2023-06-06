@@ -9,8 +9,4 @@ import Foundation
 
 public protocol RootController: AnyObject {
     associatedtype Module: CorePresentable
-
-    func start(module: Module, animated: Bool)
-
-    func add(module: Module, animated: Bool)
 }

@@ -13,18 +13,18 @@ public protocol TabBarCoordinatorProtocol {
 }
 
 public final class TabBarCoordinator: TabbarCoordinator<Assembly, BaseCoordinatorContext>, TabBarCoordinatorProtocol {
-    override public func make() -> BasePresentableCollection<UIViewController>? {
+    public override func start() {
         guard
             let assembly = assembly,
-            let mainController = assembly.outputRoutes.mainCoordinator()?.root,
-            let profileController = assembly.outputRoutes.profileCoordinator()?.root
+            let mainCoordinator = assembly.outputRoutes.mainCoordinator(),
+            let profileCoordinator = assembly.outputRoutes.profileCoordinator()
         else {
-            return nil
+            return
         }
-        
-        mainController.tabBarItem = UITabBarItem(title: "Главная", image: UIImage(systemName: "m.square.fill"), tag: 0)
-        profileController.tabBarItem = UITabBarItem(title: "Профиль", image: UIImage(systemName: "person.fill"), tag: 1)
 
-        return .init(items: [mainController, profileController])
+        mainCoordinator.root?.tabBarItem = UITabBarItem(title: "Главная", image: UIImage(systemName: "m.square.fill"), tag: 0)
+        profileCoordinator.root?.tabBarItem = UITabBarItem(title: "Профиль", image: UIImage(systemName: "person.fill"), tag: 1)
+
+        set(modules: [mainCoordinator, profileCoordinator], animated: false)
     }
 }

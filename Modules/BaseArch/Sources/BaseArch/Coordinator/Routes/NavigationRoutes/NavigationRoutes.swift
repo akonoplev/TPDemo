@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  NavigationRoutes.swift
 //  
 //
 //  Created by Daniil on 01.06.2023.
@@ -9,7 +9,7 @@ import UIKit
 
 // MARK: - NavigationRoutes
 
-public protocol NavigationRoutes {
+public protocol NavigationRoutes: CoreCoordinator {
     var navigationController: UINavigationController? { get }
 }
 
@@ -17,15 +17,19 @@ public extension NavigationRoutes {
     func push(
         viewController: UIViewController,
         animated: Bool
-    ) {
+    ) where Root.Module == UIViewController {
         navigationController?.pushViewController(viewController, animated: animated)
+
+        activate(container: viewController)
     }
 
-    func replaceWith(
-        viewController: UIViewController,
+    func set(
+        viewControllers: [UIViewController],
         animated: Bool
-    ) {
-        navigationController?.setViewControllers([viewController], animated: animated)
+    ) where Root.Module == UIViewController {
+        navigationController?.setViewControllers(viewControllers, animated: animated)
+
+        activate(containers: viewControllers)
     }
 
     func replaceWith(
@@ -103,84 +107,86 @@ public extension NavigationRoutes {
 }
 
 public extension NavigationRoutes {
-    func push<Coordinator: CoreCoordinator>(
-        coordinator: Coordinator?,
-        animated: Bool
-    ) where Coordinator.Root == UINavigationController {
-        coordinator?.root = navigationController
-
-        if let controller = coordinator?.activate() {
-            navigationController?.pushViewController(controller, animated: animated)
-        }
-    }
-
-    func push<Coordinator: CoreCoordinator>(
-        coordinator: Coordinator?,
-        animated: Bool
-    ) where Coordinator.Root.Module == AnyCoordinator<UINavigationController> {
-        push(coordinator: coordinator?.activate(), animated: animated)
-    }
-
-    func replaceWith<Coordinator: CoreCoordinator>(
-        coordinator: Coordinator?,
-        animated: Bool
-    ) where Coordinator.Root == UINavigationController {
-        coordinator?.root = navigationController
-
-        if let controller = coordinator?.activate() {
-            navigationController?.setViewControllers([controller], animated: animated)
-        }
-    }
-
-    func replaceWith<Coordinator: CoreCoordinator>(
-        coordinator: Coordinator?,
-        direction: WindowTransitionOptions.Direction,
-        animated: Bool
-    ) where Coordinator.Root == UINavigationController {
-        coordinator?.root = navigationController
-        let options: WindowTransitionOptions = .init(direction: direction)
-
-        if let controller = coordinator?.activate() {
-            if animated {
-                navigationController?.view.window?.layer.add(options.animation, forKey: kCATransition)
-                navigationController?.view.window?.makeKeyAndVisible()
-            }
-            navigationController?.setViewControllers([controller], animated: false)
-        }
-    }
-
-    func replaceCurrent<Coordinator: CoreCoordinator>(
-        coordinator: Coordinator?,
-        animated: Bool
-    ) where Coordinator.Root == UINavigationController {
-        coordinator?.root = navigationController
-
-        if let controller = coordinator?.activate(), let navСontroller = navigationController {
-            let newStack = navСontroller.viewControllers.dropLast() + [controller]
-            navigationController?.setViewControllers(Array(newStack), animated: animated)
-        }
-    }
-
-    func pop<Coordinator: CoreCoordinator>(
-        to coordinator: Coordinator?,
-        animated: Bool
-    ) where Coordinator.Root == UINavigationController {
-        guard let coordinator = coordinator, let navigationController = navigationController else {
-            return
-        }
-
-        guard let module = CoordinatorsStorage.shared.module(for: coordinator) as? UIViewController else {
-            return
-        }
-
-        guard navigationController.viewControllers.last !== module else {
-            return
-        }
-
-        guard navigationController.viewControllers.contains(where: { $0 === module }) else {
-            return
-        }
-
-        navigationController.popToViewController(module, animated: animated)
-    }
+    // Все что ниже проверить
+    
+//    func push<Coordinator: CoreCoordinator>(
+//        coordinator: Coordinator?,
+//        animated: Bool
+//    ) where Coordinator.Root == UINavigationController {
+//        coordinator?.root = navigationController
+//
+//        if let controller = coordinator?.activate() {
+//            navigationController?.pushViewController(controller, animated: animated)
+//        }
+//    }
+//
+//    func push<Coordinator: CoreCoordinator>(
+//        coordinator: Coordinator?,
+//        animated: Bool
+//    ) where Coordinator.Root.Module == AnyCoordinator<UINavigationController> {
+//        push(coordinator: coordinator?.activate(), animated: animated)
+//    }
+//
+//    func replaceWith<Coordinator: CoreCoordinator>(
+//        coordinator: Coordinator?,
+//        animated: Bool
+//    ) where Coordinator.Root == UINavigationController {
+//        coordinator?.root = navigationController
+//
+//        if let controller = coordinator?.activate() {
+//            navigationController?.setViewControllers([controller], animated: animated)
+//        }
+//    }
+//
+//    func replaceWith<Coordinator: CoreCoordinator>(
+//        coordinator: Coordinator?,
+//        direction: WindowTransitionOptions.Direction,
+//        animated: Bool
+//    ) where Coordinator.Root == UINavigationController {
+//        coordinator?.root = navigationController
+//        let options: WindowTransitionOptions = .init(direction: direction)
+//
+//        if let controller = coordinator?.activate() {
+//            if animated {
+//                navigationController?.view.window?.layer.add(options.animation, forKey: kCATransition)
+//                navigationController?.view.window?.makeKeyAndVisible()
+//            }
+//            navigationController?.setViewControllers([controller], animated: false)
+//        }
+//    }
+//
+//    func replaceCurrent<Coordinator: CoreCoordinator>(
+//        coordinator: Coordinator?,
+//        animated: Bool
+//    ) where Coordinator.Root == UINavigationController {
+//        coordinator?.root = navigationController
+//
+//        if let controller = coordinator?.activate(), let navСontroller = navigationController {
+//            let newStack = navСontroller.viewControllers.dropLast() + [controller]
+//            navigationController?.setViewControllers(Array(newStack), animated: animated)
+//        }
+//    }
+//
+//    func pop<Coordinator: CoreCoordinator>(
+//        to coordinator: Coordinator?,
+//        animated: Bool
+//    ) where Coordinator.Root == UINavigationController {
+//        guard let coordinator = coordinator, let navigationController = navigationController else {
+//            return
+//        }
+//
+//        guard let module = CoordinatorsStorage.shared.modules(for: coordinator).last as? UIViewController else {
+//            return
+//        }
+//
+//        guard navigationController.viewControllers.last !== module else {
+//            return
+//        }
+//
+//        guard navigationController.viewControllers.contains(where: { $0 === module }) else {
+//            return
+//        }
+//
+//        navigationController.popToViewController(module, animated: animated)
+//    }
 }

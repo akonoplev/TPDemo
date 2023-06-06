@@ -17,16 +17,16 @@ final class ProfileCoordinator: NavigationCoordinator<Assembly, ProfileCoordinat
     struct Context {
         let name: String
     }
-    
-    override func make() -> UIViewController? {
+
+    override func start() {
         guard let assembly = assembly else {
-            return nil
+            return
         }
 
         let actionClosure: ActionClosure? = { [weak self] _ in }
         
         let profileVC = assembly.resolver.profileBuilder(name: context.name, actionClosure: actionClosure).build()
 
-        return profileVC
+        set(viewControllers: [profileVC], animated: false)
     }
 }

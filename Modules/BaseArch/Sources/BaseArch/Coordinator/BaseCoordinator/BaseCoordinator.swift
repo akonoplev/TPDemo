@@ -19,15 +19,13 @@ open class BaseCoordinator<Assembly: AnyObject, Context, Root: RootController>: 
 
     public var actionClosure: ActionClosure?
 
-//    private var childCoordinators: [CoordinatorProtocol] = []
-
     public init(assembly: Assembly, context: Context, storage: CoordinatorActionHandlerStorageProtocol) {
         self.assembly = assembly
         self.storage = storage
         self.context = context
     }
 
-    open func make() -> Root.Module? {
+    open func start() {
         fatalError("This method is abstract")
     }
 
@@ -35,30 +33,6 @@ open class BaseCoordinator<Assembly: AnyObject, Context, Root: RootController>: 
     open func cleanup() {
         actionClosure = nil
     }
-
-//    public func startCoordinator(_ coordinator: CoordinatorProtocol) {
-//        coordinator.start()
-//        childCoordinators.append(coordinator)
-//    }
-//
-//    public func removeCoordinator(_ coordinator: CoordinatorProtocol) {
-//        for (index, childCoordinator) in childCoordinators.enumerated() where childCoordinator === coordinator {
-//            childCoordinators.remove(at: index)
-//            (childCoordinator as? BaseCoordinator)?.cleanup()
-//        }
-//    }
-
-    // reset теряет актуальность, если переходить на логику с хранилищем координаторов. Оно само отфильтрует удаленные из памяти координаторы
-//    public func resetCoordinatorsStack() {
-//        for childCoordinator in childCoordinators {
-//            guard let childBaseCoordinator = childCoordinator as? BaseCoordinator else {
-//                continue
-//            }
-//            childBaseCoordinator.resetCoordinatorsStack()
-//            childBaseCoordinator.cleanup()
-//        }
-//        childCoordinators = []
-//    }
 
     // MARK: Handling actions
 

@@ -14,6 +14,17 @@ public protocol WindowRoutes {
 }
 
 public extension WindowRoutes {
+    func start<Coordinator: CoreCoordinator>(
+        coordinator: Coordinator
+    ) where Coordinator.Root: UIViewController {
+        window?.rootViewController = coordinator.root
+        window?.makeKeyAndVisible()
+
+        coordinator.start()
+    }
+    
+    // Все что ниже проверить
+
     func replaceWith<Coordinator: CoreCoordinator>(
         coordinator: Coordinator,
         transition: WindowTransition

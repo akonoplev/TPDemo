@@ -13,6 +13,10 @@ import UIKit
 protocol AuthCodeBuilderProtocol: BuilderProtocol {}
 
 final class AuthCodeBuilder: BaseBuilder<AuthCoordinator.Context>, AuthCodeBuilderProtocol {
+    deinit {
+        print("Auth code builder was deinited")
+    }
+
     override func build() -> UIViewController {
         let viewModel = AuthCodeViewModel(phone: context.phone,
                                   service1: "", // здесь будет что-то типа resolver.service1()

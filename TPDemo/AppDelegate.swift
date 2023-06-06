@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let window = UIWindow(frame: UIScreen.main.bounds)
         self.window = window
 
-        appCoordinator.start(on: window, animated: false)
+        appCoordinator.start(on: window)
     }
 }
 

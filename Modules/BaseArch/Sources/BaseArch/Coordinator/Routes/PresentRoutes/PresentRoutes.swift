@@ -9,7 +9,7 @@ import UIKit
 
 // MARK: - PresentRoutes
 
-public protocol PresentRoutes {
+public protocol PresentRoutes: CoreCoordinator {
     var presenting: UIViewController? { get }
 }
 
@@ -20,10 +20,24 @@ public extension PresentRoutes {
         animated: Bool,
         completion: (() -> Void)? = nil
     ) where Coordinator.Root: UIViewController {
-        coordinator?.start(on: rootController, animated: false)
+        coordinator?.set(container: rootController)
+        coordinator?.start()
+
         let presentingController = presenting?.topPresentedController ?? presenting
         presentingController?.present(rootController, animated: animated, completion: completion)
     }
+
+    func dismiss(
+        animated: Bool,
+        completion: (() -> Void)? = nil
+    ) {
+        presenting?.dismiss(animated: animated, completion: completion)
+    }
+
+    // Нужен present, где в качестве root будет обычный UIViewController
+    // Нужен ли?? Мб для всяких alert или snack. А мб у них не будет координатора и не надо выдумывать тогда
+
+    // Все что ниже проверить
 
     func present<Coordinator: CoreCoordinator>(
         coordinator: Coordinator?,
@@ -31,15 +45,17 @@ public extension PresentRoutes {
         animated: Bool,
         completion: (() -> Void)? = nil
     ) where Coordinator.Root.Module == AnyCoordinator<UINavigationController> {
-        present(coordinator: coordinator?.activate(), rootController: rootController, animated: animated, completion: completion)
+//        present(coordinator: coordinator?.activate(), rootController: rootController, animated: animated, completion: completion)
     }
 
     func present(
         viewController: UIViewController,
         animated: Bool,
         completion: (() -> Void)? = nil
-    ) {
+    ) where Root.Module == UIViewController {
         let presentingController = presenting?.topPresentedController ?? presenting
         presentingController?.present(viewController, animated: animated, completion: completion)
+
+        activate(container: viewController)
     }
 }
