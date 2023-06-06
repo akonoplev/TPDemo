@@ -26,7 +26,14 @@ public class CoordinatorsStorage {
 
     struct Item {
         let coordinator: Coordinator
-        var modules: [CorePresentable?]
+        var modules: [WeakWrapper?]
+    }
+
+    class WeakWrapper {
+        weak var value: CorePresentable?
+        init(value: CorePresentable) {
+            self.value = value
+        }
     }
 
     func save(coordinator: Coordinator, modules: [CorePresentable]?) {
@@ -39,6 +46,7 @@ public class CoordinatorsStorage {
 //        }
 
         if let modules = modules {
+            let modules: [WeakWrapper] = modules.map { .init(value: $0) }
             // Проверка на повторный старт координатора
             if let index = cache.firstIndex(where: { $0.coordinator === coordinator }) {
                 cache[index].modules = modules
@@ -49,7 +57,7 @@ public class CoordinatorsStorage {
     }
 
     func modules(for coordinator: Coordinator) -> [CorePresentable?] {
-        cache.first(where: { $0.coordinator.isEqual(other: coordinator) })?.modules ?? []
+        cache.first(where: { $0.coordinator.isEqual(other: coordinator) })?.modules.map { $0?.value } ?? []
     }
 
     // MARK: Private
@@ -58,7 +66,7 @@ public class CoordinatorsStorage {
 
     private func prepare() {
         cache = cache.filter {
-            if $0.modules.isEmpty {
+            if $0.modules.filter({ $0?.value != nil }).isEmpty {
                 return false
             }
 
