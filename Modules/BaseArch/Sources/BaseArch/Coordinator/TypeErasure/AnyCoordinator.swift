@@ -31,6 +31,15 @@ public class AnyCoordinator<Root: RootController>: CoreCoordinator {
         }
     }
 
+    public var finish: ((_ context: FinishContext?) -> Void)? {
+        get {
+            _box?.finish
+        }
+        set {
+            _box?.finish = newValue
+        }
+    }
+
     public func start() {
         _box?.start()
     }
@@ -48,6 +57,7 @@ public class AnyCoordinator<Root: RootController>: CoreCoordinator {
 
 private class _AnyCoordinatorBox<Root: RootController>: CoreCoordinator {
     var root: Root?
+    var finish: ((_ context: FinishContext?) -> Void)?
 
     func start() {
         fatalError("This method is abstract")
@@ -77,6 +87,15 @@ private class _CoordinatorBox<Base: CoreCoordinator>: _AnyCoordinatorBox<Base.Ro
         }
         set {
             _base.root = newValue
+        }
+    }
+
+    override var finish: ((_ context: FinishContext?) -> Void)? {
+        get {
+            _base.finish
+        }
+        set {
+            _base.finish = newValue
         }
     }
 

@@ -30,6 +30,11 @@ final class AppCoordinator: WindowCoordinator<Assembly, BaseCoordinatorContext> 
 
         start(coordinator: tabBarCoordinator.anyCoordinator)
     }
+
+    // MARK: - integration of Auth feature module
+    func authCoordinator() -> AnyCoordinator<UINavigationController>? {
+        assembly?.authorizationAssembly.resolver.authCodeCoordinator(phone: "88005553535").anyCoordinator
+    }
     
     // MARK: - integration of Main feature module
     

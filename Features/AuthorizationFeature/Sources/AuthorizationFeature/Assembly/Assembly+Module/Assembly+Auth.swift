@@ -19,7 +19,7 @@ extension Assembly {
         Dependency.register {
             AuthCoordinator(assembly: self, context: $0, storage: Dependency.resolve())
         }
-            .implements(AuthCoordinatorProtocol.self)
+        .implements(AuthCoordinatorProtocol.self)
 
         Dependency.register { [unowned self] (context: Auth.Code.Context, actionClosure: ActionClosure?) in
             Auth.Code.Builder(

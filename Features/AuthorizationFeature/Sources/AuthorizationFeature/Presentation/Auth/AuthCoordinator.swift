@@ -14,6 +14,7 @@ public protocol AuthCoordinatorProtocol {
     var anyCoordinator: AnyCoordinator<UINavigationController> { get }
 }
 
+
 final class AuthCoordinator: NavigationCoordinator<Assembly, AuthContext>, AuthCoordinatorProtocol {
     
     deinit {
@@ -30,10 +31,10 @@ final class AuthCoordinator: NavigationCoordinator<Assembly, AuthContext>, AuthC
                 guard let self = self else {
                     return
                 }
-                
+
                 switch action {
                 case .didAuth:
-                    self.context.finish()
+                    self.finish?(nil)
                 case .changePhone:
                     self.showPhoneAuth()
                 }

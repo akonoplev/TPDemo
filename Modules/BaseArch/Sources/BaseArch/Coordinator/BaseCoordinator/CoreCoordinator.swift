@@ -13,6 +13,7 @@ public protocol CoreCoordinator: Coordinator, CorePresentable {
     associatedtype Root: RootController
 
     var root: Root? { get set }
+    var finish: ((_ context: FinishContext?) -> Void)? { get set }
 
     func start()
 }

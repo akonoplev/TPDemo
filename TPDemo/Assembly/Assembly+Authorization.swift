@@ -11,10 +11,5 @@ import SuperCore
 import UIKit
 
 extension Assembly: AuthorizationFeature.Dependencies {
-    // MARK: - integration of Auth feature module
-    func authCoordinator(finish: @escaping VoidClosure) -> AnyCoordinator<UINavigationController>? {
-
-        assembly?.authorizationAssembly.resolver.authCodeCoordinator(phone: "88005553535",
-                                                                     finish: finish).anyCoordinator
-    }
+    
 }

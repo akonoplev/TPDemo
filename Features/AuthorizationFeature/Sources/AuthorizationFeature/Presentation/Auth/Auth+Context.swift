@@ -11,10 +11,13 @@ import Foundation
 
 public struct AuthContext {
     public let phone: String
-    public let finish: VoidClosure
+//    public let authType: AuthType
 
-    public init(phone: String, finish: @escaping VoidClosure) {
+    public init(
+        phone: String
+//        authType: AuthType
+    ) {
         self.phone = phone
-        self.finish = finish
+//        self.authType = authType
     }
 }
