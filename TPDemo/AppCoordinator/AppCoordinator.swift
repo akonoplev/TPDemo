@@ -32,7 +32,16 @@ final class AppCoordinator: WindowCoordinator<Assembly, BaseCoordinatorContext> 
     }
 
     // MARK: - integration of Auth feature module
-    func authCoordinator(presentType: PresentType) -> AnyCoordinator<UINavigationController>? {
+
+    func fullScreenAuthCoordinator() -> AnyCoordinator<UINavigationController>? {
+        authCoordinator(presentType: .fullScreen)
+    }
+
+    func sheetAuthCoordinator() -> AnyCoordinator<UINavigationController>? {
+        authCoordinator(presentType: .bottomSheet(context: .cart))
+    }
+
+    private func authCoordinator(presentType: PresentType<SheetType>) -> AnyCoordinator<UINavigationController>? {
         assembly?.authorizationAssembly.resolver.authCodeCoordinator(phone: "88005553535", presentType: presentType).anyCoordinator
     }
     

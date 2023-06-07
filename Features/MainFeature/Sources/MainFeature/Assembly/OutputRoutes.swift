@@ -10,5 +10,5 @@ import SuperCore
 import UIKit
 
 public protocol OutputRoutes {
-    func authCoordinator(presentType: PresentType) -> AnyCoordinator<UINavigationController>?
+    func fullScreenAuthCoordinator() -> AnyCoordinator<UINavigationController>?
 }

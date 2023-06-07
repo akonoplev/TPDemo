@@ -31,8 +31,6 @@ public extension CoreCoordinator {
         CoordinatorsStorage.shared.save(coordinator: self, childs: childs)
     }
 
-    /// Вызывать у стартуемого координатора
-    /// container - rootController, на котором происходит запуск
     func start(on container: Root) {
         set(container: container)
 

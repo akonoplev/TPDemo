@@ -1,20 +1,24 @@
 //
-//  File.swift
+//  SheetType.swift
 //  
 //
-//  Created by Андрей Коноплев on 07.06.2023.
+//  Created by Daniil on 08.06.2023.
 //
 
-import BaseArch
+import Foundation
+
+public enum SheetType {
+    case cart
+    case subscribeToProduct
+}
 
 extension SheetType {
-
     var title: String {
         switch self {
         case .cart:
             return "Корзина"
         case .subscribeToProduct:
-            return "Подписаться на продутк"
+            return "Подписаться на продукт"
         }
     }
 
@@ -23,8 +27,7 @@ extension SheetType {
         case .cart:
             return "Корзина"
         case .subscribeToProduct:
-            return "Подписаться на продутк"
+            return "Подписаться на продукт"
         }
     }
-
 }

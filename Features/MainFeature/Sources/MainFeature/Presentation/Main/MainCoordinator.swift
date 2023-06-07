@@ -37,10 +37,10 @@ final class MainCoordinator: NavigationCoordinator<Assembly, BaseCoordinatorCont
         guard let assembly = assembly else {
             return
         }
-        present(coordinator: assembly.outputRoutes.authCoordinator(
-            presentType: .fullScreen),
-                rootController: UINavigationController(),
-                animated: true
+        present(
+            coordinator: assembly.outputRoutes.fullScreenAuthCoordinator(),
+            rootController: UINavigationController(),
+            animated: true
         )
     }
 
@@ -49,6 +49,6 @@ final class MainCoordinator: NavigationCoordinator<Assembly, BaseCoordinatorCont
             return
         }
 
-        push(coordinator: assembly.outputRoutes.authCoordinator(), animated: true)
+        push(coordinator: assembly.outputRoutes.fullScreenAuthCoordinator(), animated: true)
     }
 }
