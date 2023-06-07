@@ -9,6 +9,7 @@ import Foundation
 
 extension Auth.Code {
     struct Context {
+        let title: String?
         let phone: String
     }
 }

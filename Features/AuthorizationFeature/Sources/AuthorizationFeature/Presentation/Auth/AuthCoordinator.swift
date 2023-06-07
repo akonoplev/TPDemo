@@ -41,10 +41,17 @@ final class AuthCoordinator: NavigationCoordinator<Assembly, AuthContext>, AuthC
             }
         }
 
-        let context = Auth.Code.Context(phone: context.phone)
+        let codeContext: Auth.Code.Context
+        switch context.presentType {
+        case let .bottomSheet(sheetType):
+            codeContext = Auth.Code.Context(title: sheetType.title, phone: context.phone)
+        case .fullScreen:
+            codeContext = Auth.Code.Context(title: nil, phone: context.phone)
+        }
+
         set(
             viewControllers: [assembly.resolver.authCodeBuilder(
-                context: context,
+                context: codeContext,
                 actionClosure: actionClosure
             ).build()],
             animated: false

@@ -6,18 +6,18 @@
 //
 
 import SuperCore
-import Foundation
+import BaseArch
 
 
 public struct AuthContext {
     public let phone: String
-//    public let authType: AuthType
+    public let presentType: PresentType
 
     public init(
-        phone: String
-//        authType: AuthType
+        phone: String,
+        presentType: PresentType
     ) {
         self.phone = phone
-//        self.authType = authType
+        self.presentType = presentType
     }
 }

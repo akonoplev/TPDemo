@@ -37,8 +37,11 @@ final class MainCoordinator: NavigationCoordinator<Assembly, BaseCoordinatorCont
         guard let assembly = assembly else {
             return
         }
-
-        present(coordinator: assembly.outputRoutes.authCoordinator(), rootController: UINavigationController(), animated: true)
+        present(coordinator: assembly.outputRoutes.authCoordinator(
+            presentType: .fullScreen),
+                rootController: UINavigationController(),
+                animated: true
+        )
     }
 
     private func showPhoneAuth() {

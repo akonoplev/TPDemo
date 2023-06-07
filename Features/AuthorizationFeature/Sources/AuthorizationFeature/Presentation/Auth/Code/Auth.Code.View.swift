@@ -14,6 +14,12 @@ extension Auth.Code {
         var viewModel: ViewModel
 
         var body: some View {
+            
+            if let title = viewModel.title {
+                Text(title)
+                    .padding(.all, 20)
+            }
+
             Text(viewModel.phone)
             Button("Изменить телефон") {
                 viewModel.changePhone()
