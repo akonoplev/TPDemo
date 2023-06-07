@@ -12,17 +12,20 @@ import UIKit
 
 protocol AuthCodeBuilderProtocol: BuilderProtocol {}
 
-final class AuthCodeBuilder: BaseBuilder<AuthCoordinator.Context>, AuthCodeBuilderProtocol {
-    deinit {
-        print("Auth code builder was deinited")
-    }
+extension Auth.Code {
+    final class Builder: BaseBuilder<Auth.Code.Context>, AuthCodeBuilderProtocol {
+        deinit {
+            print("Auth code builder was deinited")
+        }
 
-    override func build() -> UIViewController {
-        let viewModel = AuthCodeViewModel(phone: context.phone,
-                                  service1: "", // здесь будет что-то типа resolver.service1()
-                                  service2: "", // здесь будет что-то типа resolver.service2()
-                                  actionClosure: actionClosure)
-        let view = AuthCodeView(viewModel: viewModel)
-        return BaseHostingViewController(rootView: view, title: "Код")
+        override func build() -> UIViewController {
+            let viewModel = Auth.Code.ViewModel(phone: context.phone,
+                                      service1: "", // здесь будет что-то типа resolver.service1()
+                                      service2: "", // здесь будет что-то типа resolver.service2()
+                                      actionClosure: actionClosure)
+            let view = Auth.Code.CodeView(viewModel: viewModel)
+            return BaseHostingViewController(rootView: view, title: "Код")
+        }
     }
 }
+

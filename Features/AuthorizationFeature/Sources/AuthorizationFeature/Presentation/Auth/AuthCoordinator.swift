@@ -14,11 +14,7 @@ public protocol AuthCoordinatorProtocol {
     var anyCoordinator: AnyCoordinator<UINavigationController> { get }
 }
 
-final class AuthCoordinator: NavigationCoordinator<Assembly, AuthCoordinator.Context>, AuthCoordinatorProtocol {
-    struct Context {
-        let phone: String
-        let finish: VoidClosure
-    }
+final class AuthCoordinator: NavigationCoordinator<Assembly, AuthContext>, AuthCoordinatorProtocol {
     
     deinit {
         print("some shit")
@@ -30,7 +26,7 @@ final class AuthCoordinator: NavigationCoordinator<Assembly, AuthCoordinator.Con
         }
 
         let actionClosure: ActionClosure? = { [weak self] action in
-            self?.handleModuleAction(action: action) { [weak self] (action: AuthCodeAction, _) in
+            self?.handleModuleAction(action: action) { [weak self] (action: Auth.Code.Action, _) in
                 guard let self = self else {
                     return
                 }
@@ -44,8 +40,12 @@ final class AuthCoordinator: NavigationCoordinator<Assembly, AuthCoordinator.Con
             }
         }
 
+        let context = Auth.Code.Context(phone: context.phone)
         set(
-            viewControllers: [assembly.resolver.authCodeBuilder(phone: context.phone, finish: context.finish, actionClosure: actionClosure).build()],
+            viewControllers: [assembly.resolver.authCodeBuilder(
+                context: context,
+                actionClosure: actionClosure
+            ).build()],
             animated: false
         )
     }

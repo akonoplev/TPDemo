@@ -7,7 +7,11 @@
 
 import BaseArch
 
-enum AuthCodeAction: ActionProtocol {
-    case didAuth
-    case changePhone
+
+extension Auth.Code {
+    enum Action: ActionProtocol {
+        case didAuth
+        case changePhone
+    }
 }
+

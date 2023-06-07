@@ -7,19 +7,22 @@
 
 import SwiftUI
 
-struct AuthCodeView: View {
-    
-    @ObservedObject
-    var viewModel: AuthCodeViewModel
-    
-    var body: some View {
-        Text(viewModel.phone)
-        Button("Изменить телефон") {
-            viewModel.changePhone()
-        }
-        Spacer(minLength: 50)
-        Button("Заканчиваем") {
-            viewModel.didFinishAuth()
+extension Auth.Code {
+    struct CodeView: View {
+
+        @ObservedObject
+        var viewModel: ViewModel
+
+        var body: some View {
+            Text(viewModel.phone)
+            Button("Изменить телефон") {
+                viewModel.changePhone()
+            }
+            Spacer(minLength: 50)
+            Button("Заканчиваем") {
+                viewModel.didFinishAuth()
+            }
         }
     }
 }
+

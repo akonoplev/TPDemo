@@ -11,13 +11,13 @@ import SuperCore
 
 public extension ResolverProtocol {
     func authCodeCoordinator(phone: String, finish: @escaping VoidClosure) -> AuthCoordinatorProtocol {
-        Dependency.resolve(arguments: phone, finish)
+        Dependency.resolve(arguments: AuthContext(phone: phone, finish: finish))
     }
 }
 
 extension ResolverProtocol {
-    func authCodeBuilder(phone: String, finish: @escaping VoidClosure, actionClosure: ActionClosure?) -> AuthCodeBuilderProtocol {
-        Dependency.resolve(arguments: phone, finish, actionClosure)
+    func authCodeBuilder(context: Auth.Code.Context, actionClosure: ActionClosure?) -> AuthCodeBuilderProtocol {
+        Dependency.resolve(arguments: context, actionClosure)
     }
 
     func authPhoneController(actionClosure: ActionClosure?) -> AuthPhoneViewControllerProtocol {

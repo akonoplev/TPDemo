@@ -9,11 +9,14 @@ import BaseArch
 
 protocol AuthPhonePresenterProtocol {}
 
-final class AuthPhonePresenter: AuthPhonePresenterProtocol {
+extension Auth.Phone {
+    final class Presenter: AuthPhonePresenterProtocol {
 
-    private let actionClosure: ActionClosure?
+        private let actionClosure: ActionClosure?
 
-    init(actionClosure: ActionClosure?) {
-        self.actionClosure = actionClosure
+        init(actionClosure: ActionClosure?) {
+            self.actionClosure = actionClosure
+        }
     }
 }
+

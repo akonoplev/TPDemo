@@ -17,13 +17,13 @@ extension Assembly {
 
     private func registerAuthCode() {
         Dependency.register {
-            AuthCoordinator(assembly: self, context: .init(phone: $0, finish: $1), storage: Dependency.resolve())
+            AuthCoordinator(assembly: self, context: $0, storage: Dependency.resolve())
         }
             .implements(AuthCoordinatorProtocol.self)
 
-        Dependency.register { [unowned self] (phone: String, finish: @escaping VoidClosure, actionClosure: ActionClosure?) in
-            AuthCodeBuilder(
-                context: .init(phone: phone, finish: finish),
+        Dependency.register { [unowned self] (context: Auth.Code.Context, actionClosure: ActionClosure?) in
+            Auth.Code.Builder(
+                context: context,
                 resolver: self.resolver,
                 actionClosure: actionClosure
             )
@@ -34,12 +34,12 @@ extension Assembly {
     private func registerAuthPhone() {
 
         Dependency.register { (actionClosure: ActionClosure?) in
-            AuthPhonePresenter(actionClosure: actionClosure)
+            Auth.Phone.Presenter(actionClosure: actionClosure)
         }
             .implements(AuthPhonePresenterProtocol.self)
 
         Dependency.register { (actionClosure: ActionClosure?) in
-            AuthPhoneViewController(
+            Auth.Phone.ViewController(
                 presenter: Dependency.resolve(arguments: actionClosure)
             )
         }

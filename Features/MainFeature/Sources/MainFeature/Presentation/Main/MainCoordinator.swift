@@ -43,4 +43,8 @@ final class MainCoordinator: NavigationCoordinator<Assembly, BaseCoordinatorCont
 
         present(coordinator: coordinator, rootController: rootController, animated: true)
     }
+
+    func showAnotherFeature() {
+
+    }
 }
