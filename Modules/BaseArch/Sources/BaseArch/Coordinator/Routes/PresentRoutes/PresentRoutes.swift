@@ -23,6 +23,10 @@ public extension PresentRoutes {
         coordinator?.set(container: rootController)
         coordinator?.start()
 
+        coordinator?.finish = { [weak self] in
+            self?.dismiss(animated: $0?.animated ?? true, completion: $0?.completion)
+        }
+
         let presentingController = presenting?.topPresentedController ?? presenting
         presentingController?.present(rootController, animated: animated, completion: completion)
     }

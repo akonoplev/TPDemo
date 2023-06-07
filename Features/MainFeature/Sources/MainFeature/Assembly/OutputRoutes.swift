@@ -10,5 +10,5 @@ import SuperCore
 import UIKit
 
 public protocol OutputRoutes {
-    func authCoordinator(finish: @escaping VoidClosure) -> AnyCoordinator<UINavigationController>?
+    func authCoordinator() -> AnyCoordinator<UINavigationController>?
 }

@@ -32,8 +32,8 @@ final class AppCoordinator: WindowCoordinator<Assembly, BaseCoordinatorContext> 
     }
 
     // MARK: - integration of Auth feature module
-    func authCoordinator(finish: @escaping VoidClosure) -> AnyCoordinator<UINavigationController>? {
-        assembly?.authorizationAssembly.resolver.authCodeCoordinator(phone: "88005553535", finish: finish).anyCoordinator
+    func authCoordinator() -> AnyCoordinator<UINavigationController>? {
+        assembly?.authorizationAssembly.resolver.authCodeCoordinator(phone: "88005553535").anyCoordinator
     }
     
     // MARK: - integration of Main feature module

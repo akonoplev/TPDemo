@@ -21,6 +21,10 @@ public extension NavigationRoutes {
         navigationController?.pushViewController(viewController, animated: animated)
 
         activate(container: viewController)
+
+        finish = { [weak self] in
+            self?.pop(animated: $0?.animated ?? true)
+        }
     }
 
     func set(

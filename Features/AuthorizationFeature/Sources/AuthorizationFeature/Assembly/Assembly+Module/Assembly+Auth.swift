@@ -17,13 +17,13 @@ extension Assembly {
 
     private func registerAuthCode() {
         Dependency.register {
-            AuthCoordinator(assembly: self, context: .init(phone: $0, finish: $1), storage: Dependency.resolve())
+            AuthCoordinator(assembly: self, context: .init(phone: $0), storage: Dependency.resolve())
         }
             .implements(AuthCoordinatorProtocol.self)
 
-        Dependency.register { [unowned self] (phone: String, finish: @escaping VoidClosure, actionClosure: ActionClosure?) in
+        Dependency.register { [unowned self] (phone: String, actionClosure: ActionClosure?) in
             AuthCodeBuilder(
-                context: .init(phone: phone, finish: finish),
+                context: .init(phone: phone),
                 resolver: self.resolver,
                 actionClosure: actionClosure
             )

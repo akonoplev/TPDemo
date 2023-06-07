@@ -36,11 +36,6 @@ final class MainCoordinator: NavigationCoordinator<Assembly, BaseCoordinatorCont
             return
         }
 
-        let rootController = UINavigationController()
-        let coordinator = assembly.outputRoutes.authCoordinator(finish: { [weak self] in
-            self?.dismiss(animated: true)
-        })
-
-        present(coordinator: coordinator, rootController: rootController, animated: true)
+        present(coordinator: assembly.outputRoutes.authCoordinator(), rootController: UINavigationController(), animated: true)
     }
 }

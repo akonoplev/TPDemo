@@ -10,14 +10,14 @@ import DipCore
 import SuperCore
 
 public extension ResolverProtocol {
-    func authCodeCoordinator(phone: String, finish: @escaping VoidClosure) -> AuthCoordinatorProtocol {
-        Dependency.resolve(arguments: phone, finish)
+    func authCodeCoordinator(phone: String) -> AuthCoordinatorProtocol {
+        Dependency.resolve(arguments: phone)
     }
 }
 
 extension ResolverProtocol {
-    func authCodeBuilder(phone: String, finish: @escaping VoidClosure, actionClosure: ActionClosure?) -> AuthCodeBuilderProtocol {
-        Dependency.resolve(arguments: phone, finish, actionClosure)
+    func authCodeBuilder(phone: String, actionClosure: ActionClosure?) -> AuthCodeBuilderProtocol {
+        Dependency.resolve(arguments: phone, actionClosure)
     }
 
     func authPhoneController(actionClosure: ActionClosure?) -> AuthPhoneViewControllerProtocol {

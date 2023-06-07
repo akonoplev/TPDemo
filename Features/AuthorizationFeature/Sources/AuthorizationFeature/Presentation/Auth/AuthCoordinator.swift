@@ -17,7 +17,6 @@ public protocol AuthCoordinatorProtocol {
 final class AuthCoordinator: NavigationCoordinator<Assembly, AuthCoordinator.Context>, AuthCoordinatorProtocol {
     struct Context {
         let phone: String
-        let finish: VoidClosure
     }
     
     deinit {
@@ -34,10 +33,10 @@ final class AuthCoordinator: NavigationCoordinator<Assembly, AuthCoordinator.Con
                 guard let self = self else {
                     return
                 }
-                
+
                 switch action {
                 case .didAuth:
-                    self.context.finish()
+                    self.finish?(nil)
                 case .changePhone:
                     self.showPhoneAuth()
                 }
@@ -45,7 +44,7 @@ final class AuthCoordinator: NavigationCoordinator<Assembly, AuthCoordinator.Con
         }
 
         set(
-            viewControllers: [assembly.resolver.authCodeBuilder(phone: context.phone, finish: context.finish, actionClosure: actionClosure).build()],
+            viewControllers: [assembly.resolver.authCodeBuilder(phone: context.phone, actionClosure: actionClosure).build()],
             animated: false
         )
     }
