@@ -9,12 +9,19 @@ import UIKit
 
 // MARK: - WindowRoutes
 
-public protocol WindowRoutes {
+public protocol WindowRoutes: CoreCoordinator {
     var window: UIWindow? { get }
 }
 
 public extension WindowRoutes {
-    func start<Coordinator: CoreCoordinator>(
+    func show(viewController: UIViewController) where Root.Child == UIViewController {
+        window?.rootViewController = viewController
+        window?.makeKeyAndVisible()
+
+        activate(child: viewController)
+    }
+
+    func show<Coordinator: CoreCoordinator>(
         coordinator: Coordinator
     ) where Coordinator.Root: UIViewController {
         window?.rootViewController = coordinator.root
@@ -22,8 +29,6 @@ public extension WindowRoutes {
 
         coordinator.start()
     }
-    
-    // Все что ниже проверить
 
     func replaceWith<Coordinator: CoreCoordinator>(
         coordinator: Coordinator,
@@ -35,27 +40,29 @@ public extension WindowRoutes {
 
         switch transition {
         case .none:
-            updateWithoutAnimation(window: window, destionationVC: destionationVC)
+            updateWithoutAnimation(window: window, destinationVC: destionationVC)
         case .fade:
-            updateWithFadeAnimation(window: window, destionationVC: destionationVC)
+            updateWithFadeAnimation(window: window, destinationVC: destionationVC)
         case .push:
-            updateWithPushAnimation(window: window, destionationVC: destionationVC)
+            updateWithPushAnimation(window: window, destinationVC: destionationVC)
         }
+
+        coordinator.start()
     }
 
-    private func updateWithoutAnimation(window: UIWindow, destionationVC: UIViewController) {
-        window.rootViewController = destionationVC
+    private func updateWithoutAnimation(window: UIWindow, destinationVC: UIViewController) {
+        window.rootViewController = destinationVC
         window.makeKeyAndVisible()
     }
 
-    private func updateWithFadeAnimation(window: UIWindow, destionationVC: UIViewController) {
+    private func updateWithFadeAnimation(window: UIWindow, destinationVC: UIViewController) {
         window.fadeTransition(duration: .normal)
-        updateWithoutAnimation(window: window, destionationVC: destionationVC)
+        updateWithoutAnimation(window: window, destinationVC: destinationVC)
     }
 
-    private func updateWithPushAnimation(window: UIWindow, destionationVC: UIViewController) {
+    private func updateWithPushAnimation(window: UIWindow, destinationVC: UIViewController) {
         // Фильтруем переходы на пустые UINavigationController
-        if (destionationVC as? UINavigationController)?.viewControllers.isEmpty == true {
+        if (destinationVC as? UINavigationController)?.viewControllers.isEmpty == true {
             return
         }
 
@@ -74,7 +81,7 @@ public extension WindowRoutes {
             window.layer.add(animation, forKey: kCATransition)
         }
 
-        window.rootViewController = destionationVC
+        window.rootViewController = destinationVC
         window.makeKeyAndVisible()
     }
 }

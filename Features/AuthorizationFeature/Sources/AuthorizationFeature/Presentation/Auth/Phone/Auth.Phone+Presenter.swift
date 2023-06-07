@@ -7,7 +7,9 @@
 
 import BaseArch
 
-protocol AuthPhonePresenterProtocol {}
+protocol AuthPhonePresenterProtocol {
+    func back()
+}
 
 extension Auth.Phone {
     final class Presenter: AuthPhonePresenterProtocol {
@@ -16,6 +18,10 @@ extension Auth.Phone {
 
         init(actionClosure: ActionClosure?) {
             self.actionClosure = actionClosure
+        }
+        
+        func back() {
+            actionClosure?(Action.back)
         }
     }
 }

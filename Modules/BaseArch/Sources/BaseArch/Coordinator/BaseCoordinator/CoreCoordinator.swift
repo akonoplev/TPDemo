@@ -19,51 +19,24 @@ public protocol CoreCoordinator: Coordinator, CorePresentable {
 }
 
 public extension CoreCoordinator {
-    func activate(container: Root.Module) {
-        CoordinatorsStorage.shared.save(coordinator: self, modules: [container])
+    func activate(child: Root.Child) {
+        CoordinatorsStorage.shared.save(coordinator: self, childs: [child])
     }
 
-    func activate(containers: [Root.Module]) {
-        CoordinatorsStorage.shared.save(coordinator: self, modules: containers)
+    func activate(childs: [Root.Child]?) {
+        guard let childs = childs else {
+            return
+        }
+
+        CoordinatorsStorage.shared.save(coordinator: self, childs: childs)
     }
 
     /// Вызывать у стартуемого координатора
     /// container - rootController, на котором происходит запуск
-    func start(on container: Root?) {
-        guard let container = container else {
-            return
-        }
-
-        root = container
+    func start(on container: Root) {
+        set(container: container)
 
         start()
-    }
-
-    /// Вызывает стартуемый coordinator из контекста другого coordinator
-    /// Передает root автоматически из текущего координатора
-    func start<Coordinator: CoreCoordinator>(
-        coordinator: Coordinator,
-        animated: Bool
-    ) where Coordinator.Root == Root {
-        coordinator.root = root
-
-        coordinator.start()
-    }
-
-    /// Вызывает стартуемый coordinator на передаваемом container
-    /// container - rootController, на котором происходит запуск
-    func start<Coordinator: CoreCoordinator>(
-        coordinator: Coordinator,
-        container: Coordinator.Root?,
-        animated: Bool
-    ) {
-        guard let container = container else {
-            return
-        }
-
-        coordinator.root = container
-
-        coordinator.start()
     }
 
     func set(container: Root) {

@@ -14,14 +14,24 @@ public protocol PresentRoutes: CoreCoordinator {
 }
 
 public extension PresentRoutes {
+    func present(
+        viewController: UIViewController,
+        animated: Bool,
+        completion: (() -> Void)? = nil
+    ) where Root.Child == UIViewController {
+        let presentingController = presenting?.topPresentedController ?? presenting
+        presentingController?.present(viewController, animated: animated, completion: completion)
+
+        activate(child: viewController)
+    }
+
     func present<Coordinator: CoreCoordinator>(
         coordinator: Coordinator?,
         rootController: Coordinator.Root,
         animated: Bool,
         completion: (() -> Void)? = nil
     ) where Coordinator.Root: UIViewController {
-        coordinator?.set(container: rootController)
-        coordinator?.start()
+        coordinator?.start(on: rootController)
 
         coordinator?.finish = { [weak self] in
             self?.dismiss(animated: $0?.animated ?? true, completion: $0?.completion)
@@ -36,30 +46,5 @@ public extension PresentRoutes {
         completion: (() -> Void)? = nil
     ) {
         presenting?.dismiss(animated: animated, completion: completion)
-    }
-
-    // Нужен present, где в качестве root будет обычный UIViewController
-    // Нужен ли?? Мб для всяких alert или snack. А мб у них не будет координатора и не надо выдумывать тогда
-
-    // Все что ниже проверить
-
-    func present<Coordinator: CoreCoordinator>(
-        coordinator: Coordinator?,
-        rootController: UINavigationController,
-        animated: Bool,
-        completion: (() -> Void)? = nil
-    ) where Coordinator.Root.Module == AnyCoordinator<UINavigationController> {
-//        present(coordinator: coordinator?.activate(), rootController: rootController, animated: animated, completion: completion)
-    }
-
-    func present(
-        viewController: UIViewController,
-        animated: Bool,
-        completion: (() -> Void)? = nil
-    ) where Root.Module == UIViewController {
-        let presentingController = presenting?.topPresentedController ?? presenting
-        presentingController?.present(viewController, animated: animated, completion: completion)
-
-        activate(container: viewController)
     }
 }
