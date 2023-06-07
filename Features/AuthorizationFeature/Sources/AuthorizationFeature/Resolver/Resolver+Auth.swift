@@ -11,8 +11,8 @@ import SuperCore
 
 public extension ResolverProtocol {
 
-    func authCodeCoordinator(phone: String) -> AuthCoordinatorProtocol {
-        Dependency.resolve(arguments: AuthContext(phone: phone))
+    func authCodeCoordinator(phone: String, presentType: PresentType) -> AuthCoordinatorProtocol {
+        Dependency.resolve(arguments: AuthContext(phone: phone, presentType: presentType))
     }
 }
 

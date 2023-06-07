@@ -19,10 +19,13 @@ extension Auth.Code {
         }
 
         override func build() -> UIViewController {
-            let viewModel = Auth.Code.ViewModel(phone: context.phone,
-                                      service1: "", // здесь будет что-то типа resolver.service1()
-                                      service2: "", // здесь будет что-то типа resolver.service2()
-                                      actionClosure: actionClosure)
+            let viewModel = Auth.Code.ViewModel(
+                phone: context.phone,
+                title: context.title,
+                service1: "", // здесь будет что-то типа resolver.service1()
+                service2: "", // здесь будет что-то типа resolver.service2()
+                actionClosure: actionClosure
+            )
             let view = Auth.Code.CodeView(viewModel: viewModel)
             return BaseHostingViewController(rootView: view, title: "Код")
         }
