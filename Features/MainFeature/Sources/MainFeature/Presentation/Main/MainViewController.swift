@@ -49,6 +49,22 @@ final class MainViewController: BaseViewController, MainViewControllerProtocol {
         ])
 
         pushButton.addTarget(self, action: #selector(pushAuth), for: .touchUpInside)
+
+        let cardButton = UIButton()
+        cardButton.backgroundColor = .gray
+        cardButton.setTitle("К карточке", for: .normal)
+        cardButton.translatesAutoresizingMaskIntoConstraints = false
+
+        view.addSubview(cardButton)
+
+        NSLayoutConstraint.activate([
+            cardButton.widthAnchor.constraint(equalToConstant: 200),
+            cardButton.heightAnchor.constraint(equalToConstant: 30),
+            cardButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            cardButton.topAnchor.constraint(equalTo: pushButton.bottomAnchor, constant: 20)
+        ])
+
+        cardButton.addTarget(self, action: #selector(showCard), for: .touchUpInside)
     }
 
     @objc func showAuth() {
@@ -57,6 +73,10 @@ final class MainViewController: BaseViewController, MainViewControllerProtocol {
 
     @objc func pushAuth() {
         presenter.pushAuth()
+    }
+
+    @objc func showCard() {
+        presenter.showCard()
     }
 
     init(presenter: MainPresenterProtcol) {

@@ -20,11 +20,13 @@ public protocol CoreCoordinator: Coordinator, CorePresentable {
 }
 
 public extension CoreCoordinator {
-    func activate(child: Root.Child) {
+    /// Активация(сохранение для текущего координатора передаваемого child)
+    func activate(child: CorePresentable) {
         CoordinatorsStorage.shared.save(coordinator: self, childs: [child])
     }
 
-    func activate(childs: [Root.Child]?) {
+    /// Активация(сохранение для текущего координатора передаваемых childs)
+    func activate(childs: [CorePresentable]?) {
         guard let childs = childs else {
             return
         }
@@ -32,12 +34,14 @@ public extension CoreCoordinator {
         CoordinatorsStorage.shared.save(coordinator: self, childs: childs)
     }
 
+    /// Выставление root у текущего координатора и вызов у него start
     func start(on container: Root) {
         set(container: container)
 
         start()
     }
 
+    /// Выставление root у текущего координатора
     func set(container: Root) {
         root = container
     }

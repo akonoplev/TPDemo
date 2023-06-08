@@ -10,6 +10,7 @@ import BaseArch
 protocol MainPresenterProtcol {
     func showAuth()
     func pushAuth()
+    func showCard()
 }
 
 final class MainPresenter: MainPresenterProtcol {
@@ -26,5 +27,9 @@ final class MainPresenter: MainPresenterProtcol {
 
     func pushAuth() {
         actionClosure?(MainAction.pushAuth)
+    }
+    
+    func showCard() {
+        actionClosure?(MainAction.showCard)
     }
 }

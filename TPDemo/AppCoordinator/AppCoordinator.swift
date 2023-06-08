@@ -5,6 +5,7 @@
 //  Created by Андрей Коноплев on 22.05.2023.
 //
 
+import CardFeature
 import MainFeature
 import TabBar
 import AuthorizationFeature
@@ -30,6 +31,8 @@ final class AppCoordinator: WindowCoordinator<Assembly, BaseCoordinatorContext> 
 
         show(coordinator: tabBarCoordinator.anyCoordinator)
     }
+
+    // MARK: - integration of Auth feature module
 
     internal func authCoordinator(presentType: PresentType) -> AnyCoordinator<UINavigationController>? {
         assembly?.authorizationAssembly.resolver.authCodeCoordinator(phone: "88005553535", presentType: presentType).anyCoordinator
@@ -62,11 +65,18 @@ final class AppCoordinator: WindowCoordinator<Assembly, BaseCoordinatorContext> 
 
         return profileCoordinator.anyCoordinator
     }
+
+    // MARK: - integration of Card feature module
+
+    internal func cardCoordinator() -> AnyCoordinator<UIViewController>? {
+        assembly?.cardAssembly.resolver.cardCoordinator().anyCoordinator
+    }
 }
 
 extension AppCoordinator: MainFeature.OutputRoutes
 & ProfileFeature.OutputRoutes
 & AuthorizationFeature.OutputRoutes
-& TabBar.OutputRoutes {
+& TabBar.OutputRoutes
+& CardFeature.OutputRoutes {
 
 }

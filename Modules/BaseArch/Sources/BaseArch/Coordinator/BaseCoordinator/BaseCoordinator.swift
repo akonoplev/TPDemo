@@ -15,7 +15,15 @@ open class BaseCoordinator<Assembly: AnyObject, Context, Root: RootController>: 
     public let context: Context
     public let storage: CoordinatorActionHandlerStorageProtocol
 
-    open weak var root: Root?
+    private weak var storedRoot: Root?
+    open var root: Root? {
+        get {
+            storedRoot
+        }
+        set {
+            storedRoot = newValue
+        }
+    }
     open var finish: ((_ context: FinishContext?) -> Void)?
 
     public var navigationType: NavigationType = .navigationStack

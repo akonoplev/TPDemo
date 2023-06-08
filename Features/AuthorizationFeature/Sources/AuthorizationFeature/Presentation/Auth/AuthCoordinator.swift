@@ -14,7 +14,6 @@ public protocol AuthCoordinatorProtocol {
     var anyCoordinator: AnyCoordinator<UINavigationController> { get }
 }
 
-
 final class AuthCoordinator: NavigationCoordinator<Assembly, AuthContext>, AuthCoordinatorProtocol {
     
     deinit {

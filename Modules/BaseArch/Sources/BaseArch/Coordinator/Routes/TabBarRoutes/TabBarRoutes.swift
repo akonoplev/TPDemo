@@ -14,6 +14,7 @@ public protocol TabBarRoutes: CoreCoordinator {
 }
 
 public extension TabBarRoutes {
+    /// Выставление контроллеров в tabBar
     func set(
         controllers: [UIViewController],
         animated: Bool
@@ -23,10 +24,12 @@ public extension TabBarRoutes {
         activate(childs: controllers)
     }
 
+    /// Выставление координаторов в tabBar
+    /// В качестве контроллеров берутся root у координаторов
     func set<Coordinator: CoreCoordinator>(
         modules: [Coordinator],
         animated: Bool
-    ) where Coordinator.Root == Root.Child, Coordinator.Root: UIViewController {
+    ) where Coordinator.Root: UIViewController {
         let roots = modules.compactMap { $0.root }
         tabBarController?.setViewControllers(roots, animated: animated)
 

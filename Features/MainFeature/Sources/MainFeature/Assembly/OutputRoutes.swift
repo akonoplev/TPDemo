@@ -11,4 +11,5 @@ import UIKit
 
 public protocol OutputRoutes {
     func authCoordinator(presentType: PresentType) -> AnyCoordinator<UINavigationController>?
+    func cardCoordinator() -> AnyCoordinator<UIViewController>?
 }

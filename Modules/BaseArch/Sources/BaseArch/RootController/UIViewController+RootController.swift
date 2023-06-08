@@ -7,6 +7,6 @@
 
 import UIKit
 
-//extension UIViewController: RootController {
-//    public typealias Child = UIViewController
-//}
+extension UIViewController: RootController {
+    public typealias Child = UIViewController
+}

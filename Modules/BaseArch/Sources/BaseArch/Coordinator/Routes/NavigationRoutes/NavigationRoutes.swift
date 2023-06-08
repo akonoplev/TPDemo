@@ -14,6 +14,7 @@ public protocol NavigationRoutes: CoreCoordinator {
 }
 
 public extension NavigationRoutes {
+    /// Простой push контроллера в стек навигации
     func push(
         viewController: UIViewController,
         animated: Bool
@@ -23,6 +24,7 @@ public extension NavigationRoutes {
         activate(child: viewController)
     }
 
+    /// Выставление готового навигационного стека
     func set(
         viewControllers: [UIViewController],
         animated: Bool
@@ -32,8 +34,9 @@ public extension NavigationRoutes {
         activate(childs: viewControllers)
     }
 
+    /// Выставление готового навигационного стека с возможностью анимации
     func replaceWith(
-        viewController: UIViewController,
+        viewControllers: [UIViewController],
         direction: WindowTransitionOptions.Direction,
         animated: Bool
     ) where Root.Child == UIViewController {
@@ -43,11 +46,12 @@ public extension NavigationRoutes {
             navigationController?.view.window?.layer.add(options.animation, forKey: kCATransition)
             navigationController?.view.window?.makeKeyAndVisible()
         }
-        navigationController?.setViewControllers([viewController], animated: false)
+        navigationController?.setViewControllers(viewControllers, animated: false)
 
-        activate(child: viewController)
+        activate(childs: viewControllers)
     }
 
+    /// Подмена последнего контроллера в стеке навигации на передаваемый
     func replaceCurrent(
         viewController: UIViewController,
         animated: Bool
@@ -60,10 +64,12 @@ public extension NavigationRoutes {
         }
     }
 
+    /// Простой pop из стека навигации
     func pop(animated: Bool) {
         navigationController?.popViewController(animated: animated)
     }
 
+    /// Pop до определенного контроллера в стеке навигации
     func pop(
         to viewController: UIViewController,
         animated: Bool
@@ -83,6 +89,7 @@ public extension NavigationRoutes {
         navigationController.popToViewController(viewController, animated: animated)
     }
 
+    /// Открыть activity экран для шаринга ссылки
     func share(link: URL) {
         let activityVC = UIActivityViewController(
             activityItems: [link],
@@ -93,6 +100,7 @@ public extension NavigationRoutes {
         navigationController?.present(activityVC, animated: true)
     }
 
+    /// Очистка промежуточного стека навигации. Остается только первый и последний контроллеры в стеке
     func clearNavigationStackToRoot() {
         guard
             var viewControllers = navigationController?.viewControllers,
@@ -111,7 +119,9 @@ public extension NavigationRoutes {
 }
 
 public extension NavigationRoutes {
-    func push<Coordinator: CoreCoordinator>(
+    /// Для старта координатора из текущего NavigationController
+    /// Root текущего координатора передастся в открываемый
+    func startOnCurrentRoot<Coordinator: CoreCoordinator>(
         coordinator: Coordinator?,
         animated: Bool
     ) where Coordinator.Root == Root {
@@ -131,6 +141,8 @@ public extension NavigationRoutes {
         coordinator?.start(on: root)
     }
 
+    /// Для старта координатора со своим rootController
+    /// Например для открытия TabBarCoordinator внутри Navigation стека
     func push<Coordinator: CoreCoordinator>(
         coordinator: Coordinator?,
         rootController: Coordinator.Root,

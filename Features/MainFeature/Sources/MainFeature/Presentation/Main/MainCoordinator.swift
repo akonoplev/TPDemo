@@ -26,6 +26,8 @@ final class MainCoordinator: NavigationCoordinator<Assembly, BaseCoordinatorCont
                     self?.showAuth()
                 case .pushAuth:
                     self?.showPhoneAuth()
+                case .showCard:
+                    self?.showCard()
                 }
             }
         }
@@ -49,6 +51,17 @@ final class MainCoordinator: NavigationCoordinator<Assembly, BaseCoordinatorCont
             return
         }
 
-        push(coordinator: assembly.outputRoutes.authCoordinator(presentType: .fullScreen), animated: true)
+        startOnCurrentRoot(coordinator: assembly.outputRoutes.authCoordinator(presentType: .fullScreen), animated: true)
+    }
+
+    private func showCard() {
+        guard let assembly = assembly else {
+            return
+        }
+
+        present(
+            coordinator: assembly.outputRoutes.cardCoordinator(),
+            animated: true
+        )
     }
 }

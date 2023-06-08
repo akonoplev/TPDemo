@@ -41,9 +41,9 @@ public class CoordinatorsStorage {
         prepare()
 
         let childs = makeWrappers(from: childs)
-        // Проверка на повторный старт координатора
+
         if let index = cache.firstIndex(where: { $0.coordinator === coordinator }) {
-            cache[index].childs = childs
+            cache[index].childs.append(contentsOf: childs)
         } else {
             cache.append(Item(coordinator: coordinator, childs: childs))
         }

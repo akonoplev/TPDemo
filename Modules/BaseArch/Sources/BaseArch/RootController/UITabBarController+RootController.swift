@@ -7,6 +7,6 @@
 
 import UIKit
 
-extension UITabBarController: RootController {
-    public typealias Child = UINavigationController
+extension UITabBarController {
+    public typealias Child = UIViewController
 }

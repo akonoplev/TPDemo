@@ -10,4 +10,5 @@ import BaseArch
 enum MainAction: ActionProtocol {
     case showCodeAuth
     case pushAuth
+    case showCard
 }

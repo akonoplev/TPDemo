@@ -7,6 +7,6 @@
 
 import UIKit
 
-extension UINavigationController: RootController {
+extension UINavigationController {
     public typealias Child = UIViewController
 }

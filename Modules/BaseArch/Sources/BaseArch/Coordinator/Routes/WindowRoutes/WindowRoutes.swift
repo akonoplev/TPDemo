@@ -14,6 +14,7 @@ public protocol WindowRoutes: CoreCoordinator {
 }
 
 public extension WindowRoutes {
+    /// Показ контроллера в окне
     func show(viewController: UIViewController) where Root.Child == UIViewController {
         window?.rootViewController = viewController
         window?.makeKeyAndVisible()
@@ -21,6 +22,7 @@ public extension WindowRoutes {
         activate(child: viewController)
     }
 
+    /// Показ координатора в окне
     func show<Coordinator: CoreCoordinator>(
         coordinator: Coordinator
     ) where Coordinator.Root: UIViewController {
@@ -32,6 +34,7 @@ public extension WindowRoutes {
         coordinator.start()
     }
 
+    /// Подмена текущего координатора на передаваемый с возможностью анимации
     func replaceWith<Coordinator: CoreCoordinator>(
         coordinator: Coordinator,
         transition: WindowTransition

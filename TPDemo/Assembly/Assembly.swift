@@ -6,6 +6,7 @@
 //
 
 import BaseArch
+import CardFeature
 import DipCore
 import AuthorizationFeature
 import MainFeature
@@ -21,6 +22,7 @@ final class Assembly {
     internal lazy var mainAssembly = MainFeature.Assembly.init(dependencies: self, outputRoutes: appCoordinator, resolver: resolver)
     internal lazy var profileAssembly = ProfileFeature.Assembly.init(dependencies: self, outputRoutes: appCoordinator, resolver: resolver)
     internal lazy var authorizationAssembly = AuthorizationFeature.Assembly.init(dependencies: self, outputRoutes: appCoordinator, resolver: resolver)
+    internal lazy var cardAssembly = CardFeature.Assembly.init(dependencies: self, outputRoutes: appCoordinator, resolver: resolver)
 
     internal lazy var appCoordinator: AppCoordinator = AppCoordinator(assembly: self, context: .init(), storage: Dependency.resolve())
     internal lazy var resolver: ResolverProtocol = {
