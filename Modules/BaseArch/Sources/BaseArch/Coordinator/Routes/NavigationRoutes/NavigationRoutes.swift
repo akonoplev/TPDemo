@@ -17,30 +17,26 @@ public extension NavigationRoutes {
     func push(
         viewController: UIViewController,
         animated: Bool
-    ) where Root.Module == UIViewController {
+    ) where Root.Child == UIViewController {
         navigationController?.pushViewController(viewController, animated: animated)
 
-        activate(container: viewController)
-
-        finish = { [weak self] in
-            self?.pop(animated: $0?.animated ?? true)
-        }
+        activate(child: viewController)
     }
 
     func set(
         viewControllers: [UIViewController],
         animated: Bool
-    ) where Root.Module == UIViewController {
+    ) where Root.Child == UIViewController {
         navigationController?.setViewControllers(viewControllers, animated: animated)
 
-        activate(containers: viewControllers)
+        activate(childs: viewControllers)
     }
 
     func replaceWith(
         viewController: UIViewController,
         direction: WindowTransitionOptions.Direction,
         animated: Bool
-    ) {
+    ) where Root.Child == UIViewController {
         let options: WindowTransitionOptions = .init(direction: direction)
 
         if animated {
@@ -48,16 +44,24 @@ public extension NavigationRoutes {
             navigationController?.view.window?.makeKeyAndVisible()
         }
         navigationController?.setViewControllers([viewController], animated: false)
+
+        activate(child: viewController)
     }
 
     func replaceCurrent(
         viewController: UIViewController,
         animated: Bool
-    ) {
+    ) where Root.Child == UIViewController {
         if let navСontroller = navigationController {
             let newStack = navСontroller.viewControllers.dropLast() + [viewController]
             navСontroller.setViewControllers(Array(newStack), animated: animated)
+
+            activate(child: viewController)
         }
+    }
+
+    func pop(animated: Bool) {
+        navigationController?.popViewController(animated: animated)
     }
 
     func pop(
@@ -77,10 +81,6 @@ public extension NavigationRoutes {
         }
 
         navigationController.popToViewController(viewController, animated: animated)
-    }
-
-    func pop(animated: Bool) {
-        navigationController?.popViewController(animated: animated)
     }
 
     func share(link: URL) {
@@ -111,86 +111,35 @@ public extension NavigationRoutes {
 }
 
 public extension NavigationRoutes {
-    // Все что ниже проверить
-    
-//    func push<Coordinator: CoreCoordinator>(
-//        coordinator: Coordinator?,
-//        animated: Bool
-//    ) where Coordinator.Root == UINavigationController {
-//        coordinator?.root = navigationController
-//
-//        if let controller = coordinator?.activate() {
-//            navigationController?.pushViewController(controller, animated: animated)
-//        }
-//    }
-//
-//    func push<Coordinator: CoreCoordinator>(
-//        coordinator: Coordinator?,
-//        animated: Bool
-//    ) where Coordinator.Root.Module == AnyCoordinator<UINavigationController> {
-//        push(coordinator: coordinator?.activate(), animated: animated)
-//    }
-//
-//    func replaceWith<Coordinator: CoreCoordinator>(
-//        coordinator: Coordinator?,
-//        animated: Bool
-//    ) where Coordinator.Root == UINavigationController {
-//        coordinator?.root = navigationController
-//
-//        if let controller = coordinator?.activate() {
-//            navigationController?.setViewControllers([controller], animated: animated)
-//        }
-//    }
-//
-//    func replaceWith<Coordinator: CoreCoordinator>(
-//        coordinator: Coordinator?,
-//        direction: WindowTransitionOptions.Direction,
-//        animated: Bool
-//    ) where Coordinator.Root == UINavigationController {
-//        coordinator?.root = navigationController
-//        let options: WindowTransitionOptions = .init(direction: direction)
-//
-//        if let controller = coordinator?.activate() {
-//            if animated {
-//                navigationController?.view.window?.layer.add(options.animation, forKey: kCATransition)
-//                navigationController?.view.window?.makeKeyAndVisible()
-//            }
-//            navigationController?.setViewControllers([controller], animated: false)
-//        }
-//    }
-//
-//    func replaceCurrent<Coordinator: CoreCoordinator>(
-//        coordinator: Coordinator?,
-//        animated: Bool
-//    ) where Coordinator.Root == UINavigationController {
-//        coordinator?.root = navigationController
-//
-//        if let controller = coordinator?.activate(), let navСontroller = navigationController {
-//            let newStack = navСontroller.viewControllers.dropLast() + [controller]
-//            navigationController?.setViewControllers(Array(newStack), animated: animated)
-//        }
-//    }
-//
-//    func pop<Coordinator: CoreCoordinator>(
-//        to coordinator: Coordinator?,
-//        animated: Bool
-//    ) where Coordinator.Root == UINavigationController {
-//        guard let coordinator = coordinator, let navigationController = navigationController else {
-//            return
-//        }
-//
-//        guard let module = CoordinatorsStorage.shared.modules(for: coordinator).last as? UIViewController else {
-//            return
-//        }
-//
-//        guard navigationController.viewControllers.last !== module else {
-//            return
-//        }
-//
-//        guard navigationController.viewControllers.contains(where: { $0 === module }) else {
-//            return
-//        }
-//
-//        navigationController.popToViewController(module, animated: animated)
-//    }
+    func push<Coordinator: CoreCoordinator>(
+        coordinator: Coordinator?,
+        animated: Bool
+    ) where Coordinator.Root == Root {
+        guard let root = root else {
+            return
+        }
+
+        finish = { [weak self, weak topViewController = navigationController?.topViewController] in
+            guard let topViewController = topViewController else {
+                return
+            }
+            self?.pop(to: topViewController, animated: $0?.animated ?? true)
+        }
+
+        coordinator?.start(on: root)
+    }
+
+    func push<Coordinator: CoreCoordinator>(
+        coordinator: Coordinator?,
+        rootController: Coordinator.Root,
+        animated: Bool
+    ) where Coordinator.Root: UIViewController {
+        finish = { [weak self] in
+            self?.pop(animated: $0?.animated ?? true)
+        }
+
+        navigationController?.pushViewController(rootController, animated: animated)
+
+        coordinator?.start(on: rootController)
+    }
 }

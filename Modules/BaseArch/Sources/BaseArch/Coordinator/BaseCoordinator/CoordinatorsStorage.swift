@@ -26,7 +26,7 @@ public class CoordinatorsStorage {
 
     struct Item {
         let coordinator: Coordinator
-        var modules: [WeakWrapper?]
+        var childs: [WeakWrapper?]
     }
 
     class WeakWrapper {
@@ -36,28 +36,25 @@ public class CoordinatorsStorage {
         }
     }
 
-    func save(coordinator: Coordinator, modules: [CorePresentable]?) {
+    func save(coordinator: Coordinator, childs: [CorePresentable]) {
         // Подчистка несуществующих координаторов
         prepare()
 
-        // Непоказываемый вариант координатора, пока не актуально
-//        if coordinator is AnyCoordinator<DemonRootController> {
-//            return
-//        }
-
-        if let modules = modules {
-            let modules: [WeakWrapper] = modules.map { .init(value: $0) }
-            // Проверка на повторный старт координатора
-            if let index = cache.firstIndex(where: { $0.coordinator === coordinator }) {
-                cache[index].modules = modules
-            } else {
-                cache.append(Item(coordinator: coordinator, modules: modules))
-            }
+        let childs = makeWrappers(from: childs)
+        // Проверка на повторный старт координатора
+        if let index = cache.firstIndex(where: { $0.coordinator === coordinator }) {
+            cache[index].childs = childs
+        } else {
+            cache.append(Item(coordinator: coordinator, childs: childs))
         }
     }
 
     func modules(for coordinator: Coordinator) -> [CorePresentable?] {
-        cache.first(where: { $0.coordinator.isEqual(other: coordinator) })?.modules.map { $0?.value } ?? []
+        guard let childs = cache.first(where: { $0.coordinator.isEqual(other: coordinator) })?.childs else {
+            return []
+        }
+
+        return makePresentables(from: childs)
     }
 
     // MARK: Private
@@ -66,24 +63,33 @@ public class CoordinatorsStorage {
 
     private func prepare() {
         cache = cache.filter {
-            if $0.modules.filter({ $0?.value != nil }).isEmpty {
+            if $0.childs.filter({ $0?.value != nil }).isEmpty {
                 return false
             }
 
-            // Пока неактуально. В СМ любой контроллер является TransitionableController, что позволяет убеждаться в том, что его показ завершен(контроллер прошел стадию didAppear или didDisappear)
-//            if let viewController = $0.module as? (UIViewController & TransitionableController), viewController.isTransitionComplete {
-//                let isViewNotLoaded = !viewController.isViewLoaded
-//                let isPresented = viewController.presentingViewController != nil
-//                let hasParent = viewController.parent != nil
-//
-//                let isRootViewController = UIApplication.shared.windows.contains {
-//                    viewController === $0.rootViewController
-//                }
-//
-//                return [isViewNotLoaded, isPresented, hasParent, isRootViewController].contains(true)
-//            }
+            if let viewControllers = $0.childs as? [(UIViewController & TransitionableController)], viewControllers.allSatisfy({ $0.isTransitionComplete }) {
+                return viewControllers.map { viewController in
+                    let isPresented = viewController.presentingViewController != nil
+                    let hasParent = viewController.parent != nil
+
+                    let isRootViewController = UIApplication.shared.windows.contains {
+                        viewController === $0.rootViewController
+                    }
+
+                    return isPresented || hasParent || isRootViewController
+                }
+                .contains(true)
+            }
 
             return true
         }
+    }
+
+    func makeWrappers(from presentables: [CorePresentable]) -> [WeakWrapper] {
+        presentables.map { .init(value: $0) }
+    }
+
+    func makePresentables(from wrappers: [WeakWrapper?]) -> [CorePresentable?] {
+        wrappers.map { $0?.value }
     }
 }

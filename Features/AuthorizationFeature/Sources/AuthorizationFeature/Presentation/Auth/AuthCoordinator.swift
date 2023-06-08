@@ -18,7 +18,7 @@ public protocol AuthCoordinatorProtocol {
 final class AuthCoordinator: NavigationCoordinator<Assembly, AuthContext>, AuthCoordinatorProtocol {
     
     deinit {
-        print("some shit")
+        print("Auth coordinator was deinited")
     }
 
     override func start() {
@@ -63,7 +63,18 @@ final class AuthCoordinator: NavigationCoordinator<Assembly, AuthContext>, AuthC
             return
         }
 
-        let actionClosure: ActionClosure? = { [weak self] _ in }
+        let actionClosure: ActionClosure? = { [weak self] action in
+            self?.handleModuleAction(action: action) { [weak self] (action: Auth.Phone.Action, _) in
+                guard let self = self else {
+                    return
+                }
+
+                switch action {
+                case .back:
+                    self.pop(animated: true)
+                }
+            }
+        }
 
         push(viewController: assembly.resolver.authPhoneController(actionClosure: actionClosure), animated: true)
     }

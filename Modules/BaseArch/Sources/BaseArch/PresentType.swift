@@ -7,12 +7,7 @@
 
 import Foundation
 
-public enum SheetType {
-    case cart
-    case subscribeToProduct
-}
-
-public enum PresentType {
+public enum PresentType<Context> {
     case fullScreen
-    case bottomSheet(sheetType: SheetType)
+    case bottomSheet(context: Context)
 }

@@ -7,11 +7,9 @@
 
 import BaseArch
 
-
 extension Auth.Code {
     enum Action: ActionProtocol {
         case didAuth
         case changePhone
     }
 }
-

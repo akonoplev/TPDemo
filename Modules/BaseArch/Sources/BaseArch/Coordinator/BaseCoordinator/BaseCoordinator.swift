@@ -16,6 +16,7 @@ open class BaseCoordinator<Assembly: AnyObject, Context, Root: RootController>: 
     public let storage: CoordinatorActionHandlerStorageProtocol
 
     open weak var root: Root?
+    open var childs: [Root.Child]?
     open var finish: ((_ context: FinishContext?) -> Void)?
 
     public var actionClosure: ActionClosure?

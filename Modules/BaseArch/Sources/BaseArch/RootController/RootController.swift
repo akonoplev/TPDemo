@@ -8,5 +8,5 @@
 import Foundation
 
 public protocol RootController: AnyObject {
-    associatedtype Module: CorePresentable
+    associatedtype Child: CorePresentable
 }

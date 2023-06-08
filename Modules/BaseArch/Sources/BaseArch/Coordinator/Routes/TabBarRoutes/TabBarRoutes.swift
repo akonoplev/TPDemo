@@ -14,11 +14,23 @@ public protocol TabBarRoutes: CoreCoordinator {
 }
 
 public extension TabBarRoutes {
+    func set(
+        controllers: [UIViewController],
+        animated: Bool
+    ) where Root.Child == UIViewController {
+        tabBarController?.setViewControllers(controllers, animated: animated)
+
+        activate(childs: controllers)
+    }
+
     func set<Coordinator: CoreCoordinator>(
         modules: [Coordinator],
         animated: Bool
-    ) where Coordinator.Root: UIViewController {
-        tabBarController?.setViewControllers(modules.compactMap { $0.root }, animated: animated)
+    ) where Coordinator.Root == Root.Child, Coordinator.Root: UIViewController {
+        let roots = modules.compactMap { $0.root }
+        tabBarController?.setViewControllers(roots, animated: animated)
+
+        activate(childs: roots)
 
         modules.forEach {
             $0.start()

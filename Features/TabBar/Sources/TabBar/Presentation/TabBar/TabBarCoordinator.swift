@@ -12,7 +12,7 @@ public protocol TabBarCoordinatorProtocol {
     var anyCoordinator: AnyCoordinator<UITabBarController> { get }
 }
 
-public final class TabBarCoordinator: TabbarCoordinator<Assembly, BaseCoordinatorContext>, TabBarCoordinatorProtocol {
+public final class TabBarCoordinator: BaseTabBarCoordinator<Assembly, BaseCoordinatorContext>, TabBarCoordinatorProtocol {
     public override func start() {
         guard
             let assembly = assembly,

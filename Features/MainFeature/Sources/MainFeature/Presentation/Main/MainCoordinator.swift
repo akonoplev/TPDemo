@@ -22,8 +22,10 @@ final class MainCoordinator: NavigationCoordinator<Assembly, BaseCoordinatorCont
         let actionClosure: ActionClosure? = { [weak self] action in
             self?.handleModuleAction(action: action) { (action: MainAction, _) in
                 switch action {
-                case .didTapToButton:
+                case .showCodeAuth:
                     self?.showAuth()
+                case .pushAuth:
+                    self?.showPhoneAuth()
                 }
             }
         }
@@ -35,14 +37,18 @@ final class MainCoordinator: NavigationCoordinator<Assembly, BaseCoordinatorCont
         guard let assembly = assembly else {
             return
         }
-        present(coordinator: assembly.outputRoutes.authCoordinator(
-            presentType: .fullScreen),
-                rootController: UINavigationController(),
-                animated: true
+        present(
+            coordinator: assembly.outputRoutes.fullScreenAuthCoordinator(),
+            rootController: UINavigationController(),
+            animated: true
         )
     }
 
-    func showAnotherFeature() {
+    private func showPhoneAuth() {
+        guard let assembly = assembly else {
+            return
+        }
 
+        push(coordinator: assembly.outputRoutes.fullScreenAuthCoordinator(), animated: true)
     }
 }

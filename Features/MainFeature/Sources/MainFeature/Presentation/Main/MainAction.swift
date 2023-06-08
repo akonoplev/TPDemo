@@ -8,5 +8,6 @@
 import BaseArch
 
 enum MainAction: ActionProtocol {
-    case didTapToButton
+    case showCodeAuth
+    case pushAuth
 }
