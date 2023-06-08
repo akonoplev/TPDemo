@@ -10,7 +10,7 @@ import DipCore
 import SuperCore
 
 public extension ResolverProtocol {
-    func authCodeCoordinator(phone: String, presentType: PresentType<SheetType>) -> AuthCoordinatorProtocol {
+    func authCodeCoordinator(phone: String, presentType: PresentType) -> AuthCoordinatorProtocol {
         Dependency.resolve(arguments: AuthContext(phone: phone, presentType: presentType))
     }
 }

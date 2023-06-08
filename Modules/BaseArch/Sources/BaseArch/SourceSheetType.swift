@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum SheetType {
+public enum SourceSheetType {
     case cart
     case subscribeToProduct
 }

@@ -119,7 +119,7 @@ public extension NavigationRoutes {
             return
         }
 
-        finish = { [weak self, weak topViewController = navigationController?.topViewController] in
+        coordinator?.finish = { [weak self, weak topViewController = navigationController?.topViewController] in
             guard let topViewController = topViewController else {
                 return
             }

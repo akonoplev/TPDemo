@@ -31,17 +31,7 @@ final class AppCoordinator: WindowCoordinator<Assembly, BaseCoordinatorContext> 
         show(coordinator: tabBarCoordinator.anyCoordinator)
     }
 
-    // MARK: - integration of Auth feature module
-
-    func fullScreenAuthCoordinator() -> AnyCoordinator<UINavigationController>? {
-        authCoordinator(presentType: .fullScreen)
-    }
-
-    func sheetAuthCoordinator() -> AnyCoordinator<UINavigationController>? {
-        authCoordinator(presentType: .bottomSheet(context: .cart))
-    }
-
-    private func authCoordinator(presentType: PresentType<SheetType>) -> AnyCoordinator<UINavigationController>? {
+    internal func authCoordinator(presentType: PresentType) -> AnyCoordinator<UINavigationController>? {
         assembly?.authorizationAssembly.resolver.authCodeCoordinator(phone: "88005553535", presentType: presentType).anyCoordinator
     }
     
@@ -77,4 +67,6 @@ final class AppCoordinator: WindowCoordinator<Assembly, BaseCoordinatorContext> 
 extension AppCoordinator: MainFeature.OutputRoutes
 & ProfileFeature.OutputRoutes
 & AuthorizationFeature.OutputRoutes
-& TabBar.OutputRoutes {}
+& TabBar.OutputRoutes {
+
+}

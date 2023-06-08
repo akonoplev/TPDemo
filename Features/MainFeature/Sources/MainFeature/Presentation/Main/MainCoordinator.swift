@@ -38,7 +38,7 @@ final class MainCoordinator: NavigationCoordinator<Assembly, BaseCoordinatorCont
             return
         }
         present(
-            coordinator: assembly.outputRoutes.fullScreenAuthCoordinator(),
+            coordinator: assembly.outputRoutes.authCoordinator(presentType: .bottomSheet(context: .cart)),
             rootController: UINavigationController(),
             animated: true
         )
@@ -49,6 +49,6 @@ final class MainCoordinator: NavigationCoordinator<Assembly, BaseCoordinatorCont
             return
         }
 
-        push(coordinator: assembly.outputRoutes.fullScreenAuthCoordinator(), animated: true)
+        push(coordinator: assembly.outputRoutes.authCoordinator(presentType: .fullScreen), animated: true)
     }
 }

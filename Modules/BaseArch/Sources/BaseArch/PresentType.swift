@@ -9,5 +9,5 @@ import Foundation
 
 public enum PresentType {
     case fullScreen
-    case bottomSheet(context: SheetType)
+    case bottomSheet(context: SourceSheetType)
 }
