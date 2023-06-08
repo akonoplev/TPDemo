@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum PresentType<Context> {
+public enum PresentType {
     case fullScreen
-    case bottomSheet(context: Context)
+    case bottomSheet(context: SheetType)
 }
