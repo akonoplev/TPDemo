@@ -31,6 +31,15 @@ public class AnyCoordinator<Root: RootController>: CoreCoordinator {
         }
     }
 
+    public var navigationType: NavigationType {
+        get {
+            _box?.navigationType ?? .navigationStack
+        }
+        set {
+            _box?.navigationType = newValue
+        }
+    }
+
     public var finish: ((_ context: FinishContext?) -> Void)? {
         get {
             _box?.finish
@@ -57,6 +66,7 @@ public class AnyCoordinator<Root: RootController>: CoreCoordinator {
 
 private class _AnyCoordinatorBox<Root: RootController>: CoreCoordinator {
     var root: Root?
+    var navigationType: NavigationType = .navigationStack
     var finish: ((_ context: FinishContext?) -> Void)?
 
     func start() {
@@ -87,6 +97,15 @@ private class _CoordinatorBox<Base: CoreCoordinator>: _AnyCoordinatorBox<Base.Ro
         }
         set {
             _base.root = newValue
+        }
+    }
+
+    override var navigationType: NavigationType {
+        get {
+            _base.navigationType
+        }
+        set {
+            _base.navigationType = newValue
         }
     }
 

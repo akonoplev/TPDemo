@@ -33,6 +33,7 @@ public extension TabBarRoutes {
         activate(childs: roots)
 
         modules.forEach {
+            $0.navigationType = .tabBar
             $0.start()
         }
     }

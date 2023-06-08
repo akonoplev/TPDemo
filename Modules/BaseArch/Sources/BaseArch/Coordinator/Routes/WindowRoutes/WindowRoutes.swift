@@ -27,6 +27,8 @@ public extension WindowRoutes {
         window?.rootViewController = coordinator.root
         window?.makeKeyAndVisible()
 
+        coordinator.navigationType = .window
+
         coordinator.start()
     }
 
@@ -47,6 +49,7 @@ public extension WindowRoutes {
             updateWithPushAnimation(window: window, destinationVC: destionationVC)
         }
 
+        coordinator.navigationType = .window
         coordinator.start()
     }
 

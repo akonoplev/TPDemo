@@ -49,13 +49,19 @@ final class AuthCoordinator: NavigationCoordinator<Assembly, AuthContext>, AuthC
             codeContext = Auth.Code.Context(title: nil, phone: context.phone)
         }
 
-        set(
-            viewControllers: [assembly.resolver.authCodeBuilder(
-                context: codeContext,
-                actionClosure: actionClosure
-            ).build()],
-            animated: false
-        )
+        let viewController = assembly.resolver.authCodeBuilder(
+            context: codeContext,
+            actionClosure: actionClosure
+        ).build()
+
+        switch navigationType {
+        case .navigationStack:
+            push(viewController: viewController, animated: true)
+        case .modally:
+            set(viewControllers: [viewController], animated: false)
+        default:
+            break
+        }
     }
 
     private func showPhoneAuth() {

@@ -126,6 +126,8 @@ public extension NavigationRoutes {
             self?.pop(to: topViewController, animated: $0?.animated ?? true)
         }
 
+        coordinator?.navigationType = .navigationStack
+
         coordinator?.start(on: root)
     }
 
@@ -139,6 +141,8 @@ public extension NavigationRoutes {
         }
 
         navigationController?.pushViewController(rootController, animated: animated)
+
+        coordinator?.navigationType = .navigationStack
 
         coordinator?.start(on: rootController)
     }

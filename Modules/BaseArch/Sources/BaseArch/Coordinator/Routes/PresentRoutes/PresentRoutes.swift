@@ -31,6 +31,7 @@ public extension PresentRoutes {
         animated: Bool,
         completion: (() -> Void)? = nil
     ) where Coordinator.Root: UIViewController {
+        coordinator?.navigationType = .modally
         coordinator?.start(on: rootController)
 
         coordinator?.finish = { [weak self] in
